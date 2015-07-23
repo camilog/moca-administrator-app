@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AdminApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="welcome_message">AdminApp</string>
+    <string name="multiply_ballots">Multiplicar los votos</string>
+    <string name="configure">Configuración</string>
+    <string name="title_activity_multiply_ballots">MultiplyBallotsActivity</string>
+
+    <string name="upload_candidates_file">Subir archivo de candidatos</string>
+    <string name="title_activity_upload_candidates_file">UploadCandidatesFileActivity</string>
+</resources>

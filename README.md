@@ -1,7 +1,10 @@
-# BallotsMultiplicationApp
-Sixth part of the [*MoCa QR*](http://www.github.com/CamiloG/moca_qr) Voting System project.
+# AdministratorApp
+App for the Election Administrator, which is part of the [*MoCa QR*](http://www.github.com/CamiloG/moca_qr) Voting System project.
 
-Android app for any person to multiplicate the encrypted ballots present on the Bulletin Board server and upload the resulting value.
+Android app for the administrators to run all the next tasks:
+- Set the list of candidates and upload candidates.xml to the BB.
+- Check integrity and correctness of the BB.
+- Calculate the ballots multiplication at the end of the election and upload the value to the BB.
 
 ## Files
 1. **MainActivity.java**:

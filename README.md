@@ -1,5 +1,5 @@
 # AdministratorApp
-App for the Election Administrator, which is part of the [*MoCa QR*](http://www.github.com/CamiloG/moca_qr) Voting System project.
+App for the Election Administrator, which is part of the [*MoCa QR*](http://mocaqr.niclabs.cl) Voting System project.
 
 Android app for the administrators to run all the following tasks:
 - Set the list of candidates and upload candidates.xml to the BB.

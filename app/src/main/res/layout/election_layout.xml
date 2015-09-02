@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/">
+    android:id="@+id/election_layout">
 
     <TextView
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="In progress"
+        android:text="@string/in_progress"
         android:id="@+id/textView2"
         android:layout_alignTop="@+id/rectangleView"
         android:layout_toEndOf="@+id/rectangleView"
@@ -41,7 +41,7 @@
         android:layout_height="50dp"
         android:id="@+id/imageButton"
         android:layout_marginEnd="26dp"
-        android:src="@drawable/settingsIcon"
+        android:src="@drawable/settings_icon"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:layout_below="@+id/textView"
@@ -50,7 +50,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start/Stop"
+        android:text="@string/start_stop"
         android:id="@+id/button"
         android:layout_marginTop="32dp"
         android:background="@color/abc_search_url_text_normal"
@@ -60,7 +60,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Display results"
+        android:text="@string/display_results"
         android:id="@+id/button2"
         android:layout_marginTop="21dp"
         android:background="@color/abc_search_url_text_normal"
@@ -70,7 +70,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Count votes"
+        android:text="@string/count_votes"
         android:id="@+id/button3"
         android:layout_marginTop="23dp"
         android:background="@color/abc_search_url_text_normal"

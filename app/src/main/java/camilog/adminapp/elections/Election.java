@@ -19,6 +19,11 @@ public class Election {
         this(name, "");
     }
 
+    @Override
+    public String toString(){
+        return _name;
+    }
+
     public void addCandidate(Candidate newCandidate){
         //TODO
         try{
@@ -30,7 +35,7 @@ public class Election {
     }
 
     public void addCandidateByName(String name){
-        //TODO: creates a candidate and makes call to addCandidate
+        //TODO: instantiates a candidate and makes call to addCandidate
     }
 
     public ElectionResults getResults(){

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 
@@ -19,14 +21,24 @@ import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+
+import camilog.adminapp.elections.Election;
 
 
 public class MainActivity extends Activity {
-
+    private ArrayList<Election> _elections;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.election_layout);
+        setContentView(R.layout.activity_main);
+        _elections = new ArrayList<>();
+        _elections.add(new Election("Color favorito?"));
+        _elections.add(new Election("Animal favorito?"));
+
+        ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _elections);
+        ListView listView = (ListView) findViewById(R.id.elections_listview);
+        listView.setAdapter(arrayAdapter);
     }
 
     @Override

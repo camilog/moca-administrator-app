@@ -28,7 +28,7 @@ public class ElectionTest {
         Assert.assertEquals(0, fullElection.getNumberOfCandidates());
         Assert.assertFalse(fullElection.hasCandidates());
 
-        fullElection.addCandidate(new Candidate());
+        fullElection.addCandidate(new Candidate("Juanito"));
 
         Assert.assertEquals(1, fullElection.getNumberOfCandidates());
         Assert.assertTrue(fullElection.hasCandidates());

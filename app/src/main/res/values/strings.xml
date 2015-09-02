@@ -21,4 +21,5 @@
     <string name="create_election">Create</string>
     <string name="panel_name">Administration Panel</string>
     <string name="elections">Elections</string>
+    <string name="title_activity_new_election">NewElectionActivity</string>
 </resources>

@@ -1,51 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.threepartballot.camilog.signatureapp.MainActivity">
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/panel_name"
+        android:id="@+id/admin_panel_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@color/button_material_light"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_message"
-        android:typeface="monospace"
-        android:textSize="20dp"
-        android:paddingTop="15dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginTop="15dp"
+        android:textSize="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/elections"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/admin_panel_text"
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/multiply_ballots"
-        android:background="@drawable/btn_green"
-        style="@style/ButtonText"
-        android:id="@+id/multiply_button"
-        android:layout_above="@+id/upload_candidates_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="135dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/upload_candidates_file"
-        android:background="@drawable/btn_green"
-        style="@style/ButtonText"
-        android:id="@+id/upload_candidates_button"
-        android:layout_above="@+id/configurate_button"
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/elections_listview"
+        android:layout_below="@+id/textView6"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/configure"
-        android:id="@+id/configurate_button"
-        android:background="@drawable/btn_blue"
-        style="@style/ButtonText"
-        android:layout_marginBottom="92dp"
-        android:textSize="25dp"
+        android:drawableLeft="@android:drawable/ic_input_add"
+        android:background="@color/abc_search_url_text_normal"
+        android:text="@string/new_election"
+        android:id="@+id/new_election_button"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

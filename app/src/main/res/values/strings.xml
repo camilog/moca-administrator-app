@@ -19,4 +19,6 @@
     <string name="election_name">Name:</string>
     <string name="candidates_list">Candidates</string>
     <string name="create_election">Create</string>
+    <string name="panel_name">Administration Panel</string>
+    <string name="elections">Elections</string>
 </resources>

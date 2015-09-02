@@ -18,14 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MultiplyBallotsActivity"
-            android:label="@string/title_activity_multiply_ballots" >
-        </activity>
-        <activity
-            android:name=".UploadCandidatesFileActivity"
-            android:label="@string/title_activity_upload_candidates_file" >
-        </activity>
     </application>
 
 </manifest>

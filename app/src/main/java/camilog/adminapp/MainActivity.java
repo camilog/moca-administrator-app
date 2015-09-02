@@ -27,27 +27,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button multiplyBallotsButton = (Button) findViewById(R.id.multiply_button);
-        Button uploadCandidatesFile = (Button) findViewById(R.id.upload_candidates_button);
-        Button configureButton = (Button) findViewById(R.id.configurate_button);
-
-        multiplyBallotsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MultiplyBallotsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        uploadCandidatesFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, UploadCandidatesFileActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override

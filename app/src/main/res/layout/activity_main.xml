@@ -22,7 +22,7 @@
         android:textSize="30dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/elections"
-        android:id="@+id/textView6"
+        android:id="@+id/elections_listview_text"
         android:layout_below="@+id/admin_panel_text"
         android:layout_centerHorizontal="true" />
 
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/elections_listview"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@id/elections_listview_text"
         android:layout_centerHorizontal="true" />
 
     <Button

@@ -17,6 +17,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ElectionActivity"
+            android:label="Election">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ConfigurationActivity"
+            android:label="Settings">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".NewElectionActivity"
+            android:label="Create new election">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>-->
+        </activity>
     </application>
 
 </manifest>

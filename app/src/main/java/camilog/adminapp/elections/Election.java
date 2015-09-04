@@ -40,10 +40,11 @@ public class Election {
         //TODO
         try{
             _candidates.add(newCandidate);
+            _noCandidates++;
         }catch(Exception e){
 
         }
-        _noCandidates++;
+
     }
 
     public void addCandidateByName(String name){
@@ -64,10 +65,8 @@ public class Election {
     }
 
     public String toJSON(){
-
         return new Gson().toJson(this);
     }
-
     public boolean hasCandidates(){
         return _noCandidates > 0;
     }

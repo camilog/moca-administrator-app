@@ -50,15 +50,12 @@ public class Election {
     public void uploadInformationToServer(){
         //TODO:
     }
-
     public boolean hasCandidates(){
         return _noCandidates > 0;
     }
-
     public void setBBServer(String bbServerURL){_serverURL = bbServerURL;}
     public String getBBServer(){return _serverURL;}
     public int getNumberOfCandidates(){return _noCandidates;}
     public String getElectionName(){return _name;}
     public ArrayList<Candidate> getCandidates(){return _candidates;}
-
 }

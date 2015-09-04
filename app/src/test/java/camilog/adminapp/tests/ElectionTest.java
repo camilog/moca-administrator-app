@@ -38,4 +38,11 @@ public class ElectionTest {
     public void testNoServerElection(){
         Assert.assertTrue(noServerElection.getBBServer().isEmpty());
     }
+
+    @Test
+    public void testJson(){
+        fullElection.addCandidate(new Candidate("Juanito"));
+        fullElection.addCandidate(new Candidate("Pedrito"));
+        Assert.assertEquals("{\"_serverURL\":\"http://localhost:3030\",\"_name\":\"Favourite Color?\",\"_noCandidates\":2,\"_candidates\":[{\"_name\":\"Juanito\"},{\"_name\":\"Pedrito\"}]}", fullElection.toJSON());
+    }
 }

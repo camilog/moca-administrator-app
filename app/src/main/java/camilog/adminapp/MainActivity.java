@@ -25,33 +25,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         initViews();
         addOnClickListeners();
-        _elections = new ArrayList<>();
-        _elections.add(new Election("Color favorito?")); // TEMPORAL!!
-        _elections.add(new Election("Animal favorito?"));
-        //TODO: Las elecciones tienen que ser obtenidas y agregadas desde una base de datos
-        ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _elections);
-        candidatesListView.setAdapter(arrayAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        populateElections();
     }
 
     private void goToElection(Election election){
@@ -62,8 +36,16 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    private void populateElections(){
+        //TODO: Las elecciones tienen que ser obtenidas y agregadas desde una base de datos, aqu'i se deber'ian hacer esas llamadas
+        _elections = new ArrayList<>();
+        _elections.add(new Election("Color favorito?")); // TEMPORAL!!
+        _elections.add(new Election("Animal favorito?"));
+        ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _elections);
+        candidatesListView.setAdapter(arrayAdapter);
+    }
+
     private void addOnClickListeners(){
-        if(candidatesListView == null)return;
         candidatesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -74,6 +56,5 @@ public class MainActivity extends Activity {
 
     private void initViews(){
         candidatesListView = (ListView) findViewById(R.id.elections_listview);
-        if(candidatesListView == null)System.exit(0);
     }
 }

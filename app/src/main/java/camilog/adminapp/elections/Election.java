@@ -1,11 +1,21 @@
 package camilog.adminapp.elections;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
  * Created by stefano on 02-09-15.
  */
 public class Election {
+    public static final String JSON_NAME = "name";
+    public static final String JSON_CANDIDATES = "candidates";
+    public static final String JSON_NUMBER_CANDIDATES = "number_candidates";
+    public static final String JSON_BBSERVER = "bb_server";
+
     private String _serverURL, _name;
     private int _noCandidates;
     private ArrayList<Candidate> _candidates;
@@ -13,6 +23,8 @@ public class Election {
         _name = name;
         _serverURL = bbserver;
         _candidates = new ArrayList<>();
+        _noCandidates = 0;
+
     }
 
     public Election(String name){
@@ -27,7 +39,7 @@ public class Election {
     public void addCandidate(Candidate newCandidate){
         //TODO
         try{
-
+            _candidates.add(newCandidate);
         }catch(Exception e){
 
         }
@@ -50,6 +62,12 @@ public class Election {
     public void uploadInformationToServer(){
         //TODO:
     }
+
+    public String toJSON(){
+
+        return new Gson().toJson(this);
+    }
+
     public boolean hasCandidates(){
         return _noCandidates > 0;
     }

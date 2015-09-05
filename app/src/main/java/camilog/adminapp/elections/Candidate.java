@@ -10,9 +10,6 @@ public class Candidate {
         _name = name;
     }
 
-    public void addVote(){
-        //TODO: vote for the candidate
-    }
 
     public String toString(){return _name;}
     public String getName(){return _name;}

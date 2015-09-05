@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by stefano on 02-09-15.
@@ -44,7 +45,11 @@ public class Election {
         }catch(Exception e){
 
         }
-
+    }
+    public void addListOfCandidatesByName(String[] candidatesNames){
+        for(String name : candidatesNames){
+            addCandidateByName(name);
+        }
     }
 
     public void addCandidateByName(String name){

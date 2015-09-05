@@ -2,16 +2,15 @@ package camilog.adminapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
 
+import camilog.adminapp.db.ElectionManager;
+import camilog.adminapp.db.ElectionSqlHelper;
 import camilog.adminapp.elections.Election;
 
 
@@ -19,13 +18,19 @@ public class MainActivity extends Activity {
     public static final String ELECTION_INFORMATION_NAME = "camilog.adminapp.ELECTION_INFORMATION_NAME";
     private ArrayList<Election> _elections;
     private ListView candidatesListView;
+    private ElectionManager electionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setElectionManager();
         initViews();
         addOnClickListeners();
         populateElections();
+    }
+
+    private void setElectionManager(){
+        electionManager = new ElectionManager(this);
     }
 
     private void goToElection(Election election){
@@ -37,12 +42,17 @@ public class MainActivity extends Activity {
     }
 
     private void populateElections(){
-        //TODO: Las elecciones tienen que ser obtenidas y agregadas desde una base de datos, aqu'i se deber'ian hacer esas llamadas
         _elections = new ArrayList<>();
-        _elections.add(new Election("Color favorito?")); // TEMPORAL!!
-        _elections.add(new Election("Animal favorito?"));
+        ElectionSqlHelper.ElectionCursor cursor = electionManager.getAllElections();
+        fillElectionsWithCursor(cursor);
         ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _elections);
         candidatesListView.setAdapter(arrayAdapter);
+    }
+
+    private void fillElectionsWithCursor(ElectionSqlHelper.ElectionCursor cursor){
+        while(cursor.moveToNext()){
+            _elections.add(cursor.getElection());
+        }
     }
 
     private void addOnClickListeners(){

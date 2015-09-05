@@ -27,6 +27,9 @@ public class MainActivity extends Activity {
         initViews();
         addOnClickListeners();
         populateElections();
+
+        //TODO: MUY IMPORTANTE: NECESITO ASOCIARLE LA ID A CADA ELECTION EN RUNTIME PARA PODER PEDIR LOS CANDIDATOS!! puedo ocupar la misma id que genera la DB
+        //
     }
 
     private void setElectionManager(){

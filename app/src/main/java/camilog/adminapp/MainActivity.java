@@ -16,9 +16,12 @@ import camilog.adminapp.elections.Election;
 
 public class MainActivity extends Activity {
     public static final String ELECTION_INFORMATION_NAME = "camilog.adminapp.ELECTION_INFORMATION_NAME";
+    public static final String ELECTION_INFORMATION_ID = "camilog.adminapp.ELECTION_INFORMATION_ID";
+
     private ArrayList<Election> _elections;
     private ListView candidatesListView;
     private ElectionManager electionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

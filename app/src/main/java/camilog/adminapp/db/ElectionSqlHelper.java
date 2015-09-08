@@ -25,6 +25,7 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ELECTION_NAME = "name";
     private static final String COLUMN_CANDIDATES = "candidates";
     private static final String COLUMN_BBSERVER = "server";
+    private static final String COLUMN_ID = "_id";
 
     public ElectionSqlHelper(Context context){
         super(context, DB_NAME, null, VERSION);
@@ -86,6 +87,7 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
             String[] candidatesNames = getString(getColumnIndex(COLUMN_CANDIDATES)).split(",");
             election = new Election(electionName, bb_server);
             election.addListOfCandidatesByName(candidatesNames);
+            election.setDB_ID(getInt(getColumnIndex(COLUMN_ID)));
             return election;
         }
     }

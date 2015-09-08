@@ -20,12 +20,13 @@ public class Election {
     private String _serverURL, _name;
     private int _noCandidates;
     private ArrayList<Candidate> _candidates;
+    private long _db_id;
     public Election(String name, String bbserver){
         _name = name;
         _serverURL = bbserver;
         _candidates = new ArrayList<>();
         _noCandidates = 0;
-
+        _db_id = 0;
     }
 
     public Election(String name){
@@ -53,7 +54,7 @@ public class Election {
     }
 
     public void addCandidateByName(String name){
-        //TODO: instantiates a candidate and makes call to addCandidate
+        addCandidate(new Candidate(name));
     }
 
     public ElectionResults getResults(){
@@ -80,4 +81,6 @@ public class Election {
     public int getNumberOfCandidates(){return _noCandidates;}
     public String getElectionName(){return _name;}
     public ArrayList<Candidate> getCandidates(){return _candidates;}
+    public void setDB_ID(long id){_db_id = id;}
+    public long getDB_ID(){return _db_id;}
 }

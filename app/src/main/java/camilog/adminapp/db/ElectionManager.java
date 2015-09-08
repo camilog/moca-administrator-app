@@ -13,11 +13,15 @@ public class ElectionManager {
 
     public ElectionManager(Context context){
         _context = context;
-        _helper = new ElectionSqlHelper(context);
+        _helper = ElectionSqlHelper.getElectionSqlHelper(context);
     }
 
     public ElectionSqlHelper.ElectionCursor getAllElections(){
         return _helper.queryAllElections();
+    }
+
+    public ElectionSqlHelper.ElectionCursor getElectionById(long id){
+        return _helper.queryElectionById(id);
     }
 
     public void insertElection(Election e){

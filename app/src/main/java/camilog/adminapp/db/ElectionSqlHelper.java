@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import camilog.adminapp.MainActivity;
 import camilog.adminapp.elections.Candidate;
 import camilog.adminapp.elections.Election;
 
@@ -27,8 +28,16 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
     private static final String COLUMN_BBSERVER = "server";
     private static final String COLUMN_ID = "_id";
 
-    public ElectionSqlHelper(Context context){
+    private static ElectionSqlHelper uniqueInstance = null;
+
+    private ElectionSqlHelper(Context context){
         super(context, DB_NAME, null, VERSION);
+    }
+    public static ElectionSqlHelper getElectionSqlHelper(Context context){
+        if(uniqueInstance==null){
+            uniqueInstance = new ElectionSqlHelper(context);
+        }
+        return uniqueInstance;
     }
 
     @Override
@@ -71,6 +80,11 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
 
     public ElectionCursor queryAllElections(){
         Cursor cursor = getReadableDatabase().query(TABLE_ELECTIONS,null, null, null, null, null, null);
+        return new ElectionCursor(cursor);
+    }
+
+    public ElectionCursor queryElectionById(long id){
+        Cursor cursor = getReadableDatabase().query(TABLE_ELECTIONS,null, "_id = ?", new String[]{String.valueOf(id)}, null,null,null);
         return new ElectionCursor(cursor);
     }
 

@@ -3,6 +3,7 @@ package camilog.adminapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,12 +37,13 @@ public class MainActivity extends Activity {
     }
 
     private void setElectionManager(){
-        electionManager = new ElectionManager(this);
+        electionManager = new ElectionManager(getApplicationContext());
     }
 
-    private void goToElection(Election election){
+
+    private void goToElection(long electionId){
         Bundle electionInformation = new Bundle();
-        electionInformation.putString(ELECTION_INFORMATION_NAME, election.getElectionName());
+        electionInformation.putLong(ELECTION_INFORMATION_ID, electionId);
         Intent intent = new Intent(this, ElectionActivity.class);
         intent.putExtras(electionInformation);
         startActivity(intent);
@@ -49,8 +51,11 @@ public class MainActivity extends Activity {
 
     private void populateElections(){
         _elections = new ArrayList<>();
-        ElectionSqlHelper.ElectionCursor cursor = electionManager.getAllElections();
-        fillElectionsWithCursor(cursor);
+        fillElectionsWithCursor(electionManager.getAllElections());
+        configureElectionsAdapter();
+    }
+
+    private void configureElectionsAdapter(){
         ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _elections);
         candidatesListView.setAdapter(arrayAdapter);
     }
@@ -65,7 +70,7 @@ public class MainActivity extends Activity {
         candidatesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                goToElection( (Election) (adapterView.getItemAtPosition(i)));
+                goToElection( ((Election) (adapterView.getItemAtPosition(i))).getDB_ID());
             }
         });
     }

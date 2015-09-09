@@ -88,6 +88,13 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
         return new ElectionCursor(cursor);
     }
 
+    public void updateElection(Election e){
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_BBSERVER, e.getBBServer());
+        cv.put(COLUMN_CANDIDATES, getElectionCandidatesAsCsv(e));
+        getWritableDatabase().update(TABLE_ELECTIONS,cv, "_id = " + e.getDB_ID(), null);
+    }
+
 
     public static class ElectionCursor extends CursorWrapper{
         public ElectionCursor(Cursor cursor){

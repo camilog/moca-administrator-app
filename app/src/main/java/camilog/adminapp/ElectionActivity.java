@@ -1,40 +1,59 @@
 package camilog.adminapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import camilog.adminapp.db.ElectionManager;
-import camilog.adminapp.db.ElectionSqlHelper;
+import camilog.adminapp.elections.Candidate;
 import camilog.adminapp.elections.Election;
+import camilog.adminapp.elections.ElectionHolder;
 
 /**
  * Created by stefano on 04-09-15.
  */
 public class ElectionActivity extends Activity {
+    public static final String ELECTION_INFORMATION_ID = "camilog.adminapp.ELECTION_INFORMATION_ID";
+
     private ElectionManager _electionManager;
     private Election _election;
+    private ElectionHolder _electionHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.election_layout);
-        initElectionManager();
-        initializeElection();
-        setUpElectionLayout();
+        try{
+            initElectionManager();
+            initElectionHolder();
+            initializeElection();
+            setUpElectionLayout();
+            addOnClickListeners();
+        }catch(ElectionHolder.ElectionNotFoundException e){
+            Log.i("jiji", "Error loading elections: " + e.getMessage());
+            System.exit(1);
+        }
     }
+
 
     private void initElectionManager(){
         _electionManager = new ElectionManager(getApplicationContext());
     }
 
-    private void initializeElection(){
+    private void initElectionHolder(){
+        _electionHolder = ElectionHolder.getElectionHolder();
+    }
+
+    private void initializeElection() throws ElectionHolder.ElectionNotFoundException{
         long id = getIntent().getExtras().getLong(MainActivity.ELECTION_INFORMATION_ID);
-        ElectionSqlHelper.ElectionCursor cursor = _electionManager.getElectionById(id);
-        while(cursor.moveToNext()){
-            _election = cursor.getElection();
-        }
+        _election = _electionHolder.getElectionById(id);
+        _election.setBBServer("IT WORKS!");
     }
 
     private void setUpElectionLayout(){
@@ -44,10 +63,31 @@ public class ElectionActivity extends Activity {
 
     private void setElectionName(){
         TextView tv = (TextView) findViewById(R.id.election_name_text);
-        tv.setText( _election.getElectionName() );
+        tv.setText(_election.getElectionName());
     }
 
     private void addElectionCandidates(){
-        //TODO:
+        ListView candidatesListView = (ListView)findViewById(R.id.candidates_listview);
+        if(candidatesListView == null)System.exit(1);
+        ArrayAdapter<Candidate> arrayAdapter = new ArrayAdapter<Candidate>(this, android.R.layout.simple_list_item_1, _election.getCandidates());
+        candidatesListView.setAdapter(arrayAdapter);
+    }
+
+    private void startConfigurationActivity(){
+        Intent intent = new Intent(this, ConfigurationActivity.class);
+        Bundle electionInformation = new Bundle();
+        electionInformation.putLong(ELECTION_INFORMATION_ID, _election.getDB_ID());
+        intent.putExtras(electionInformation);
+        startActivity(intent);
+    }
+
+    private void addOnClickListeners(){
+        ImageButton configButton = (ImageButton) findViewById(R.id.settings_button);
+        configButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startConfigurationActivity();
+            }
+        });
     }
 }

@@ -27,4 +27,8 @@ public class ElectionManager {
     public void insertElection(Election e){
         _helper.insertElection(e);
     }
+
+    public void updateElection(Election e){
+        _helper.updateElection(e);
+    }
 }

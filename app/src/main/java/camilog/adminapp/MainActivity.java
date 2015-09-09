@@ -32,13 +32,7 @@ public class MainActivity extends Activity {
         initViews();
         addOnClickListeners();
         createAndPopulateElectionHolder();
-        populateElectionsFirstTime();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        populateElections();
+        configureElectionsAdapter();
     }
 
     private void setElectionManager(){
@@ -53,35 +47,13 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    private void populateElectionsFirstTime(){
-        populateElections();
-        configureElectionsAdapter();
-    }
-
-    private void populateElections(){
-        _elections = new ArrayList<>();
-        fillElectionsArrayWithHolder();
-    }
-
-    private void fillElectionHolderWithCursor(ElectionSqlHelper.ElectionCursor cursor){
-        while(cursor.moveToNext()){
-            _electionHolder.addElection(cursor.getElection());
-        }
-    }
-
-    private void fillElectionsArrayWithHolder(){
-        for(Election election : _electionHolder.getAllElections()){
-            _elections.add(election);
-        }
-    }
-
     private void createAndPopulateElectionHolder(){
         _electionHolder = ElectionHolder.getElectionHolder();
         fillHolderWithCursor(_electionManager.getAllElections());
     }
 
     private void configureElectionsAdapter(){
-        ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _elections);
+        ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _electionHolder.getElectionsAsList());
         _electionsListView.setAdapter(arrayAdapter);
     }
 

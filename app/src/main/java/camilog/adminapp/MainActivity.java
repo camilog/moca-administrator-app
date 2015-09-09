@@ -3,10 +3,13 @@ package camilog.adminapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import camilog.adminapp.db.ElectionManager;
@@ -16,10 +19,7 @@ import camilog.adminapp.elections.ElectionHolder;
 
 
 public class MainActivity extends Activity {
-    public static final String ELECTION_INFORMATION_NAME = "camilog.adminapp.ELECTION_INFORMATION_NAME";
     public static final String ELECTION_INFORMATION_ID = "camilog.adminapp.ELECTION_INFORMATION_ID";
-
-    private ArrayList<Election> _elections;
     private ListView _electionsListView;
     private ElectionManager _electionManager;
     private ElectionHolder _electionHolder;

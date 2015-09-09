@@ -7,6 +7,7 @@ import android.database.CursorWrapper;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_BBSERVER, e.getBBServer());
         cv.put(COLUMN_CANDIDATES, getElectionCandidatesAsCsv(e));
-        getWritableDatabase().update(TABLE_ELECTIONS,cv, "_id = " + e.getDB_ID(), null);
+        getWritableDatabase().update(TABLE_ELECTIONS, cv, "_id = " + e.getDB_ID(), null);
     }
 
 

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -33,7 +34,6 @@ public class ElectionActivity extends Activity {
             initElectionManager();
             initElectionHolder();
             initializeElection();
-            setUpElectionLayout();
             addOnClickListeners();
         }catch(ElectionHolder.ElectionNotFoundException e){
             Log.i("jiji", "Error loading elections: " + e.getMessage());
@@ -41,6 +41,11 @@ public class ElectionActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpElectionLayout();
+    }
 
     private void initElectionManager(){
         _electionManager = new ElectionManager(getApplicationContext());
@@ -53,7 +58,6 @@ public class ElectionActivity extends Activity {
     private void initializeElection() throws ElectionHolder.ElectionNotFoundException{
         long id = getIntent().getExtras().getLong(MainActivity.ELECTION_INFORMATION_ID);
         _election = _electionHolder.getElectionById(id);
-        _election.setBBServer("IT WORKS!");
     }
 
     private void setUpElectionLayout(){

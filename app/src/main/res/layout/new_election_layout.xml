@@ -1,9 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
     android:id="@+id/new_election_layout">
 
     <TextView
@@ -67,7 +64,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:id="@+id/candidates_listview"
+        android:id="@+id/new_candidates_listview"
         android:layout_below="@+id/listview_name_text"
         android:layout_centerHorizontal="true" />
 
@@ -78,17 +75,16 @@
         android:drawableLeft="@android:drawable/ic_input_add"
         android:background="@color/abc_search_url_text_normal"
         android:id="@+id/add_candidate_button"
-        android:layout_below="@+id/candidates_listview"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/create_election_button"
+        android:layout_alignStart="@+id/create_election_button" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="@string/create_election"
         android:id="@+id/create_election_button"
         android:background="@color/abc_search_url_text_normal"
-        android:layout_below="@+id/add_candidate_button"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

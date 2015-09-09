@@ -77,7 +77,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/candidates_listview"
+        android:id="@+id/new_candidates_listview"
         android:layout_below="@+id/settings_button"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/start_stop_button"

@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -71,7 +70,7 @@ public class ElectionActivity extends Activity {
     }
 
     private void addElectionCandidates(){
-        ListView candidatesListView = (ListView)findViewById(R.id.candidates_listview);
+        ListView candidatesListView = (ListView)findViewById(R.id.new_candidates_listview);
         if(candidatesListView == null)System.exit(1);
         ArrayAdapter<Candidate> arrayAdapter = new ArrayAdapter<Candidate>(this, android.R.layout.simple_list_item_1, _election.getCandidates());
         candidatesListView.setAdapter(arrayAdapter);

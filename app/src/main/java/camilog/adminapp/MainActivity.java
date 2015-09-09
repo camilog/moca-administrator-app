@@ -31,8 +31,14 @@ public class MainActivity extends Activity {
         setElectionManager();
         initViews();
         addOnClickListeners();
-        populateElections();
         createAndPopulateElectionHolder();
+        populateElectionsFirstTime();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populateElections();
     }
 
     private void setElectionManager(){
@@ -47,15 +53,31 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    private void populateElectionsFirstTime(){
+        populateElections();
+        configureElectionsAdapter();
+    }
+
     private void populateElections(){
         _elections = new ArrayList<>();
-        fillElectionsWithCursor(_electionManager.getAllElections());
-        configureElectionsAdapter();
+        fillElectionsArrayWithHolder();
+    }
+
+    private void fillElectionHolderWithCursor(ElectionSqlHelper.ElectionCursor cursor){
+        while(cursor.moveToNext()){
+            _electionHolder.addElection(cursor.getElection());
+        }
+    }
+
+    private void fillElectionsArrayWithHolder(){
+        for(Election election : _electionHolder.getAllElections()){
+            _elections.add(election);
+        }
     }
 
     private void createAndPopulateElectionHolder(){
         _electionHolder = ElectionHolder.getElectionHolder();
-        _electionHolder.addListOfElections(_elections);
+        fillHolderWithCursor(_electionManager.getAllElections());
     }
 
     private void configureElectionsAdapter(){
@@ -63,9 +85,9 @@ public class MainActivity extends Activity {
         _electionsListView.setAdapter(arrayAdapter);
     }
 
-    private void fillElectionsWithCursor(ElectionSqlHelper.ElectionCursor cursor){
+    private void fillHolderWithCursor(ElectionSqlHelper.ElectionCursor cursor){
         while(cursor.moveToNext()){
-            _elections.add(cursor.getElection());
+            _electionHolder.addElection(cursor.getElection());
         }
     }
 

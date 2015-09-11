@@ -5,10 +5,23 @@
     <string name="action_settings">Settings</string>
 
     <string name="welcome_message">AdminApp</string>
-    <string name="multiply_ballots">Multiplicar los votos</string>
-    <string name="configure">Configuración</string>
-    <string name="title_activity_multiply_ballots">MultiplyBallotsActivity</string>
-
-    <string name="upload_candidates_file">Subir archivo de candidatos</string>
-    <string name="title_activity_upload_candidates_file">UploadCandidatesFileActivity</string>
+    <string name="start_stop">Start/Stop</string>
+    <string name="display_results">Display Results</string>
+    <string name="count_votes">Count votes</string>
+    <string name="in_progress">In Progress</string>
+    <string name="stopped">Stopped</string>
+    <string name="settings">Settings</string>
+    <string name="add_candidate">Add candidate</string>
+    <string name="bb_server_url_setting">BB Server URL:</string>
+    <string name="bb_server_hint">http://example.com:3337</string>
+    <string name="election_name_hint">What is your favourite color?</string>
+    <string name="new_election">New election</string>
+    <string name="election_name">Name:</string>
+    <string name="candidates_list">Candidates</string>
+    <string name="create_election">Create</string>
+    <string name="panel_name">Administration Panel</string>
+    <string name="elections">Elections</string>
+    <string name="title_activity_new_election">NewElectionActivity</string>
+    <string name="save">Save</string>
+    <string name="upload_to_bb_text">Upload to Bulletin Board</string>
 </resources>

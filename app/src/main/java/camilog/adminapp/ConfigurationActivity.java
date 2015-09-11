@@ -34,9 +34,9 @@ public class ConfigurationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configuration_layout);
         try{
+            initElectionManager();
             initElectionHolder();
             initElection();
-            initElectionManager();
             setupLayout();
             addOnClickListeners();
         }catch(ElectionHolder.ElectionNotFoundException e){
@@ -55,7 +55,7 @@ public class ConfigurationActivity extends Activity {
     }
 
     private void initElectionHolder(){
-        _electionHolder = ElectionHolder.getElectionHolder();
+        _electionHolder = ElectionHolder.getElectionHolder(_electionManager);
     }
     private void initElectionManager(){
         _electionManager = new ElectionManager(getApplicationContext());

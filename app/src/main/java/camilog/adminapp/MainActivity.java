@@ -48,8 +48,7 @@ public class MainActivity extends Activity {
     }
 
     private void createAndPopulateElectionHolder(){
-        _electionHolder = ElectionHolder.getElectionHolder();
-        fillHolderWithCursor(_electionManager.getAllElections());
+        _electionHolder = ElectionHolder.getElectionHolder(_electionManager);
     }
 
     private void configureElectionsAdapter(){

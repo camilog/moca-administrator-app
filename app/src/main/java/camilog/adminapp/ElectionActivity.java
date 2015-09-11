@@ -51,7 +51,7 @@ public class ElectionActivity extends Activity {
     }
 
     private void initElectionHolder(){
-        _electionHolder = ElectionHolder.getElectionHolder();
+        _electionHolder = ElectionHolder.getElectionHolder(_electionManager);
     }
 
     private void initializeElection() throws ElectionHolder.ElectionNotFoundException{

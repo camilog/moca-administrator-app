@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +34,12 @@ public class MainActivity extends Activity {
         addOnClickListeners();
         createAndPopulateElectionHolder();
         configureElectionsAdapter();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((ArrayAdapter<Election>)_electionsListView.getAdapter()).notifyDataSetChanged();
     }
 
     private void setElectionManager(){
@@ -69,6 +76,18 @@ public class MainActivity extends Activity {
                 goToElection(((Election) (adapterView.getItemAtPosition(i))).getDB_ID());
             }
         });
+        Button newElectionButton = (Button) findViewById(R.id.new_election_button);
+        newElectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startNewElectionActivity();
+            }
+        });
+    }
+
+    private void startNewElectionActivity(){
+        Intent intent = new Intent(this, NewElectionActivity.class);
+        startActivity(intent);
     }
 
     private void initViews(){

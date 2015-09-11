@@ -2,7 +2,6 @@ package camilog.adminapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -79,7 +77,7 @@ public class ConfigurationActivity extends Activity {
             }
         });
 
-        Button addCandidateButton = (Button) findViewById(R.id.add_candidate_button);
+        Button addCandidateButton = (Button) findViewById(R.id.new_election_add_candidate_button);
         addCandidateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

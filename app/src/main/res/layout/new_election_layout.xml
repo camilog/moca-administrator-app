@@ -74,7 +74,7 @@
         android:text="@string/add_candidate"
         android:drawableLeft="@android:drawable/ic_input_add"
         android:background="@color/abc_search_url_text_normal"
-        android:id="@+id/add_candidate_button"
+        android:id="@+id/new_election_add_candidate_button"
         android:layout_above="@+id/create_election_button"
         android:layout_alignStart="@+id/create_election_button" />
 

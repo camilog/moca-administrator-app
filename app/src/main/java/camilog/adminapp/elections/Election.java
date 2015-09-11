@@ -47,6 +47,11 @@ public class Election {
 
         }
     }
+    public void addListOfCandidates(List<Candidate> candidates){
+        for(Candidate candidate: candidates){
+            addCandidate(candidate);
+        }
+    }
     public void addListOfCandidatesByName(String[] candidatesNames){
         for(String name : candidatesNames){
             addCandidateByName(name);

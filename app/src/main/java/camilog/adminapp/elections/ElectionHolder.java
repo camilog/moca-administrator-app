@@ -59,5 +59,6 @@ public class ElectionHolder {
     public class ElectionNotFoundException extends Exception{
         public ElectionNotFoundException(String s){super(s);}
     }
+
 }
 

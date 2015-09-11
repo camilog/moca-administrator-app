@@ -14,11 +14,6 @@ import camilog.adminapp.serverapi.BBServer;
  * Created by stefano on 02-09-15.
  */
 public class Election {
-    public static final String JSON_NAME = "name";
-    public static final String JSON_CANDIDATES = "candidates";
-    public static final String JSON_NUMBER_CANDIDATES = "number_candidates";
-    public static final String JSON_BBSERVER = "bb_server";
-
     private String _name;
     private int _noCandidates;
     private ArrayList<Candidate> _candidates;
@@ -66,21 +61,10 @@ public class Election {
         return null;
     }
 
-    public void countVotes(){
-        //TODO:
-    }
-
-    public void uploadInformationToServer(){
-        //TODO:
-    }
-
     public void uploadToBBServer(){
         _bbServer.uploadElection(this);
     }
 
-    public String toJSON(){
-        return new Gson().toJson(this);
-    }
     public boolean hasCandidates(){
         return _noCandidates > 0;
     }

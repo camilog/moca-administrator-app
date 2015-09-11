@@ -34,6 +34,7 @@
             </intent-filter>-->
         </activity>
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".NewElectionActivity"
             android:label="Create new election">
             <!--<intent-filter>

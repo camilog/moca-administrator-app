@@ -23,4 +23,5 @@
     <string name="elections">Elections</string>
     <string name="title_activity_new_election">NewElectionActivity</string>
     <string name="save">Save</string>
+    <string name="upload_to_bb_text">Upload to Bulletin Board</string>
 </resources>

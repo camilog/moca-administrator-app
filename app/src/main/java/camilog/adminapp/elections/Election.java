@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import camilog.adminapp.serverapi.BBServer;
+
 /**
  * Created by stefano on 02-09-15.
  */
@@ -17,13 +19,15 @@ public class Election {
     public static final String JSON_NUMBER_CANDIDATES = "number_candidates";
     public static final String JSON_BBSERVER = "bb_server";
 
-    private String _serverURL, _name;
+    private String _name;
     private int _noCandidates;
     private ArrayList<Candidate> _candidates;
     private long _db_id;
+    private BBServer _bbServer;
+
     public Election(String name, String bbserver){
         _name = name;
-        _serverURL = bbserver;
+        _bbServer = new BBServer(bbserver);
         _candidates = new ArrayList<>();
         _noCandidates = 0;
         _db_id = 0;
@@ -39,13 +43,8 @@ public class Election {
     }
 
     public void addCandidate(Candidate newCandidate){
-        //TODO
-        try{
-            _candidates.add(newCandidate);
-            _noCandidates++;
-        }catch(Exception e){
-
-        }
+        _candidates.add(newCandidate);
+        _noCandidates++;
     }
     public void addListOfCandidates(List<Candidate> candidates){
         for(Candidate candidate: candidates){
@@ -75,14 +74,18 @@ public class Election {
         //TODO:
     }
 
+    public void uploadToBBServer(){
+        _bbServer.uploadElection(this);
+    }
+
     public String toJSON(){
         return new Gson().toJson(this);
     }
     public boolean hasCandidates(){
         return _noCandidates > 0;
     }
-    public void setBBServer(String bbServerURL){_serverURL = bbServerURL;}
-    public String getBBServer(){return _serverURL;}
+    public void setBBServer(String bbServerURL){_bbServer.setAddress(bbServerURL);}
+    public String getBBServer(){return _bbServer.getAddress();}
     public int getNumberOfCandidates(){return _noCandidates;}
     public String getElectionName(){return _name;}
     public ArrayList<Candidate> getCandidates(){return _candidates;}

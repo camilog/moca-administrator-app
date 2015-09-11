@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -90,6 +91,13 @@ public class ElectionActivity extends Activity {
             @Override
             public void onClick(View view) {
                 startConfigurationActivity();
+            }
+        });
+        Button uploadButton = (Button) findViewById(R.id.upload_to_bb_button);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _election.uploadToBBServer();
             }
         });
     }

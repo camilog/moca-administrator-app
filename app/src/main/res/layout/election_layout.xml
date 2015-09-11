@@ -80,7 +80,16 @@
         android:id="@+id/new_candidates_listview"
         android:layout_below="@+id/settings_button"
         android:layout_centerHorizontal="true"
+        android:headerDividersEnabled="false"
+        android:layout_above="@+id/upload_to_bb_button" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/upload_to_bb_text"
+        android:id="@+id/upload_to_bb_button"
+        android:background="@color/abc_search_url_text_normal"
         android:layout_above="@+id/start_stop_button"
-        android:headerDividersEnabled="false" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

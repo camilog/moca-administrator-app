@@ -37,10 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@android:drawable/ic_input_add"
-        android:background="@color/abc_search_url_text_normal"
+        android:background="@drawable/btn_blue"
         android:text="@string/new_election"
         android:id="@+id/new_election_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:enabled="true" />
 
 </RelativeLayout>

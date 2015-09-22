@@ -100,5 +100,12 @@ public class ElectionActivity extends Activity {
                 _election.uploadToBBServer();
             }
         });
+        Button multiplyBallotsButton = (Button) findViewById(R.id.multiply_ballots_button);
+        multiplyBallotsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _election.multiplyBallots();
+            }
+        });
     }
 }

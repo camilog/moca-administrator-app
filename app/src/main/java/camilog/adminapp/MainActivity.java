@@ -63,12 +63,6 @@ public class MainActivity extends Activity {
         _electionsListView.setAdapter(arrayAdapter);
     }
 
-    private void fillHolderWithCursor(ElectionSqlHelper.ElectionCursor cursor){
-        while(cursor.moveToNext()){
-            _electionHolder.addElection(cursor.getElection());
-        }
-    }
-
     private void addOnClickListeners(){
         _electionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

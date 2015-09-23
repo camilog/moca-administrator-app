@@ -28,8 +28,8 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
 
     private BigInteger multiplyBallotsThread(Election election) throws IOException, KeyNotFoundException{
         Log.i("jiji", "voy a intentar conectarme");
-        Log.i("jiji", "adress = " + _server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_DOCS_SUBDOMAIN());
-        URL obj = new URL(_server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_DOCS_SUBDOMAIN());
+        Log.i("jiji", "adress = " + _server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
+        URL obj = new URL(_server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
@@ -37,28 +37,16 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         Log.i("jiji", "codigo conexion =  " + String.valueOf(code));
         String response = getResponseFromInputStream(con.getInputStream());
         Gson gson = new Gson();
-        AllDocsResponse ballotResponse = gson.fromJson(response, AllDocsResponse.class);
-        AllDocsResponse.AllDocsRowsResponse[] rowsResponse = ballotResponse.rows;
+        BallotsAllDocsResponse ballotResponse = gson.fromJson(response, BallotsAllDocsResponse.class);
+        BallotsAllDocsResponse.BallotRowsResponse[] rowsResponse = ballotResponse.rows;
         BigInteger result = BigInteger.ONE;
         BigInteger authorityPublicKey = downloadAuthorityPublicKey();
-        double downloadTime = 0;
-        double multiplicationTime = 0;
         for(int i=0;i<ballotResponse.total_rows;i++){
-            String rowId = rowsResponse[i].id;
-            if(i%100==0)Log.i("jiji", "llevo " + String.valueOf(i));
-            long startDownload = System.currentTimeMillis();
-            BigInteger encryptedVoteValue = getEncryptedVoteValueById(rowId);
-            long deltaDownload = System.currentTimeMillis() - startDownload;
-            downloadTime += (1.0 * deltaDownload)/1000;
-            long startMult = System.currentTimeMillis();
+            BigInteger encryptedVoteValue = new BigInteger(rowsResponse[i].value);
             encryptedVoteValue = encryptedVoteValue.mod(authorityPublicKey);
             result = result.multiply(encryptedVoteValue);
             result = result.mod(authorityPublicKey);
-            long deltaMult = System.currentTimeMillis() - startMult;
-            multiplicationTime += (1.0 * deltaMult)/1000;
         }
-        Log.i("jiji", "tiempo multiplicando " + String.valueOf(multiplicationTime));
-        Log.i("jiji", "tiempo descargando " + String.valueOf(downloadTime));
         Log.i("jiji", "termine de multplicar, resultado = " + String.valueOf(result));
         return result;
     }
@@ -85,7 +73,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         con.setRequestProperty("Content-Type", "application/json");
         con.getResponseCode();
         String response = getResponseFromInputStream(con.getInputStream());
-        return new BigInteger((new Gson()).fromJson(response, AllDocsResponse.ParticularBallotResponse.class).encrypted_vote);
+        return new BigInteger((new Gson()).fromJson(response, BallotsAllDocsResponse.BallotRowsResponse.class).value);
     }
 
     private BigInteger getAuthorityPublicKeyById(String id) throws IOException{
@@ -93,12 +81,12 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
-        con.getResponseCode();
+        int code = con.getResponseCode();
         String response = getResponseFromInputStream(con.getInputStream());
 
-        Log.i("jiji", "recibiendo key = " + (new Gson()).fromJson(response, AllDocsResponse.ParticularAuthorityPublicKeyResponse.class).value);
+        Log.i("jiji", "recibiendo key = " + (new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value);
 
-        return new BigInteger((new Gson()).fromJson(response, AllDocsResponse.ParticularAuthorityPublicKeyResponse.class).value);
+        return new BigInteger((new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value);
     }
 
     private BigInteger downloadAuthorityPublicKey() throws KeyNotFoundException, IOException{
@@ -107,18 +95,18 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
-        con.getResponseCode();
+        int code = con.getResponseCode();
         String response = getResponseFromInputStream(con.getInputStream());
         Gson gson = new Gson();
-        AllDocsResponse allDocsResponse = gson.fromJson(response, AllDocsResponse.class);
-        AllDocsResponse.AllDocsRowsResponse[] allDocsRowsResponse = allDocsResponse.rows;
-        String publicKeyId = getFirstRowId(allDocsRowsResponse);
+        AuthorityPublicKeyAllDocsResponse allDocsResponse = gson.fromJson(response, AuthorityPublicKeyAllDocsResponse.class);
+        AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyRowsResponse[] rowsResponse = allDocsResponse.rows;
+        String publicKeyId = getFirstRowId(rowsResponse);
         publicKey = getAuthorityPublicKeyById(publicKeyId);
         if(publicKey == null)throw new KeyNotFoundException();
         return publicKey;
     }
 
-    private String getFirstRowId(AllDocsResponse.AllDocsRowsResponse[] allDocsRowsResponses){
+    private String getFirstRowId(AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyRowsResponse[] allDocsRowsResponses){
         return allDocsRowsResponses[0].id;
     }
 
@@ -145,16 +133,20 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         }.start();
     }
 
-    private static class AllDocsResponse{
+    private static class AuthorityPublicKeyAllDocsResponse{
         int total_rows;
-        AllDocsRowsResponse[] rows;
-        private static class AllDocsRowsResponse{
+        AuthorityPublicKeyRowsResponse[] rows;
+        private class AuthorityPublicKeyRowsResponse{
             String id;
         }
-        private static class ParticularBallotResponse{
-            String encrypted_vote;
+        private class AuthorityPublicKeyParticularResponse{
+            String value;
         }
-        private static class ParticularAuthorityPublicKeyResponse{
+    }
+    private static class BallotsAllDocsResponse{
+        int total_rows;
+        BallotRowsResponse[] rows;
+        private class BallotRowsResponse{
             String value;
         }
     }

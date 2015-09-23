@@ -19,6 +19,7 @@ public class BBServer {
     private final String ALL_DOCS_SUBDOMAIN = "_all_docs";
     private final String MULTIPLIED_BALLOTS_SUBDOMAIN = "multiplied_ballots";
     private final String AUTHORITY_PUBLIC_KEY_SUBDOMAIN = "authority_public_key";
+    private final String ALL_BALLOTS_VALUES_SUBDOMAIN = "_design/get_all_ballots/_view/get_all_ballots";
 
     private String _serverAddress;
     public BBServer(String address){
@@ -40,4 +41,5 @@ public class BBServer {
     public String getALL_DOCS_SUBDOMAIN(){return ALL_DOCS_SUBDOMAIN;}
     public String getMULTIPLIED_BALLOTS_SUBDOMAIN(){return MULTIPLIED_BALLOTS_SUBDOMAIN;}
     public String getAUTHORITY_PUBLIC_KEY_SUBDOMAIN(){return AUTHORITY_PUBLIC_KEY_SUBDOMAIN;}
+    public String getALL_BALLOTS_VALUES_SUBDOMAIN(){return ALL_BALLOTS_VALUES_SUBDOMAIN;}
 }

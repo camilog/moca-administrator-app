@@ -3,12 +3,14 @@ package camilog.adminapp.serverapi;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Key;
 
 import camilog.adminapp.elections.Election;
 
@@ -20,7 +22,6 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         super(server);
     }
     public void multiplyBallots(final Election election){
-        //TODO:
         startMultiplyBallotsThread(election);
     }
 
@@ -44,12 +45,19 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         }
     }
 
-    private void uploadResultToBBServer() throws IOException{
+    private void uploadMultipliedBallots(BigInteger multipliedBallots) throws IOException {
+        // Set the URL where to POST the ballot
         URL obj = new URL(_server.getAddress() + "/" + _server.getMULTIPLIED_BALLOTS_SUBDOMAIN());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        //TODO: cómo subir??
+        String urlParameters = "{\"multiplied_ballot\":{\"value\":" + multipliedBallots.toString() + "}}";
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+        con.getResponseCode();
     }
 
     private BigInteger getEncryptedVoteValueById(int id) throws IOException{
@@ -60,6 +68,20 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         con.getResponseCode();
         String response = getResponseFromInputStream(con.getInputStream());
         return new BigInteger((new Gson()).fromJson(response, BallotResponse.ParticularBallotResponse.class).encrypted_vote);
+    }
+
+    private BigInteger downloadAuthorityPublicKey() throws KeyNotFoundException, IOException{
+        BigInteger publicKey = null;
+        URL obj = new URL(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN());
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.getResponseCode();
+        String response = getResponseFromInputStream(con.getInputStream());
+        Gson gson = new Gson();
+        //TODO: terminar de bajar la publickey
+        if(publicKey == null)throw new KeyNotFoundException();
+        return publicKey;
     }
 
     private String getResponseFromInputStream(InputStream inputStream) throws IOException{
@@ -95,5 +117,6 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
             String encrypted_vote;
         }
     }
+    private class KeyNotFoundException extends Exception{}
 
 }

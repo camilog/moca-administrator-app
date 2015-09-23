@@ -43,7 +43,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         BigInteger authorityPublicKey = downloadAuthorityPublicKey();
         double downloadTime = 0;
         double multiplicationTime = 0;
-        for(int i=0;i<ballotResponse.total_rows/50;i++){
+        for(int i=0;i<ballotResponse.total_rows;i++){
             String rowId = rowsResponse[i].id;
             if(i%100==0)Log.i("jiji", "llevo " + String.valueOf(i));
             long startDownload = System.currentTimeMillis();

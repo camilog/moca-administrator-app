@@ -30,7 +30,7 @@ public class BBServer {
     }
 
     public void multiplyBallots(final Election election){
-        new BallotsMultiplier(this).multiplyBallots(election);;
+        new BallotsMultiplier(this).multiplyAndUploadBallots(election);;
     }
 
     public void setAddress(String serverAddress){_serverAddress = serverAddress;}

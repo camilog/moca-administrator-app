@@ -105,6 +105,7 @@ public class ElectionActivity extends Activity {
             @Override
             public void onClick(View view) {
                 _election.multiplyBallots();
+                Log.i("jiji", "voy a tratar de multiplicar los ballots");
             }
         });
     }

@@ -61,7 +61,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        String urlParameters = "{\"multiplied_ballot\":{\"value\":" + multipliedBallots.toString() + "}}";
+        String urlParameters = new MultipliedBallotsMessage(multipliedBallots).toJSON();
         //TODO: preguntar camilo
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -120,7 +120,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
             public void run(){
                 try{
                     BigInteger multipliedBallots = multiplyBallotsThread(election);
-                    //uploadMultipliedBallots(multipliedBallots);
+                    uploadMultipliedBallots(multipliedBallots);
                 }catch(Exception e){}
             }
         }.start();
@@ -141,6 +141,22 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         BallotRowsResponse[] rows;
         private class BallotRowsResponse{
             String value;
+        }
+    }
+
+    private static class MultipliedBallotsMessage{
+        Parameters multiplied_ballots;
+        private class Parameters{
+            String value;
+            public Parameters(String value){
+                this.value = value;
+            }
+        }
+        public MultipliedBallotsMessage(BigInteger multipliedBallots){
+            multiplied_ballots = new Parameters(multipliedBallots.toString());
+        }
+        public String toJSON(){
+            return new Gson().toJson(this);
         }
     }
     private class KeyNotFoundException extends Exception{}

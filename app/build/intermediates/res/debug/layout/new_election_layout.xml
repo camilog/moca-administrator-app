@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_election_layout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/new_election"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@color/button_material_light"
+        android:id="@+id/new_election_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/bb_server_url_setting"
+        android:id="@+id/new_election_bb_server_text"
+        android:layout_below="@+id/new_election_text"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/bb_server_hint"
+        android:id="@+id/new_election_bb_server_edit"
+        android:layout_below="@+id/new_election_bb_server_text"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/election_name"
+        android:id="@+id/new_election_name_text"
+        android:layout_below="@+id/new_election_bb_server_edit"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/election_name_hint"
+        android:gravity="center"
+        android:layout_below="@+id/new_election_name_text"
+        android:layout_alignParentStart="true"
+        android:id="@+id/new_election_name_edit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/candidates_list"
+        android:id="@+id/listview_name_text"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/new_candidates_listview"
+        android:layout_below="@+id/listview_name_text"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_candidate"
+        android:drawableLeft="@android:drawable/ic_input_add"
+        android:background="@drawable/btn_blue"
+        android:id="@+id/new_election_add_candidate_button"
+        android:layout_above="@+id/create_election_button"
+        android:layout_alignStart="@+id/create_election_button" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_election"
+        android:id="@+id/create_election_button"
+        android:background="@drawable/btn_blue"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
+<!-- From: file:/home/stefano/nicproj/moca-administrator-app/app/src/main/res/layout/new_election_layout.xml -->

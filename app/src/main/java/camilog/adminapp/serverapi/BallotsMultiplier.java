@@ -27,6 +27,20 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
     }
 
     private BigInteger multiplyBallotsThread(Election election) throws IOException, KeyNotFoundException{
+        BallotsAllDocsResponse.BallotRowsResponse[] ballotRowsResponse = downloadBallotsAsRows();
+        BigInteger authorityPublicKey = downloadAuthorityPublicKey();
+        BigInteger result = BigInteger.ONE;
+        for(BallotsAllDocsResponse.BallotRowsResponse row : ballotRowsResponse){
+            BigInteger encryptedVoteValue = new BigInteger(row.value);
+            encryptedVoteValue = encryptedVoteValue.mod(authorityPublicKey);
+            result = result.multiply(encryptedVoteValue);
+            result = result.mod(authorityPublicKey);
+        }
+        Log.i("jiji", "termine de multplicar, resultado = " + String.valueOf(result));
+        return result;
+    }
+
+    private BallotsAllDocsResponse.BallotRowsResponse[] downloadBallotsAsRows() throws IOException{
         Log.i("jiji", "voy a intentar conectarme");
         Log.i("jiji", "adress = " + _server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
         URL obj = new URL(_server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
@@ -39,25 +53,16 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         Gson gson = new Gson();
         BallotsAllDocsResponse ballotResponse = gson.fromJson(response, BallotsAllDocsResponse.class);
         BallotsAllDocsResponse.BallotRowsResponse[] rowsResponse = ballotResponse.rows;
-        BigInteger result = BigInteger.ONE;
-        BigInteger authorityPublicKey = downloadAuthorityPublicKey();
-        for(int i=0;i<ballotResponse.total_rows;i++){
-            BigInteger encryptedVoteValue = new BigInteger(rowsResponse[i].value);
-            encryptedVoteValue = encryptedVoteValue.mod(authorityPublicKey);
-            result = result.multiply(encryptedVoteValue);
-            result = result.mod(authorityPublicKey);
-        }
-        Log.i("jiji", "termine de multplicar, resultado = " + String.valueOf(result));
-        return result;
+        return rowsResponse;
     }
 
     private void uploadMultipliedBallots(BigInteger multipliedBallots) throws IOException {
-        // Set the URL where to POST the ballot
         URL obj = new URL(_server.getAddress() + "/" + _server.getMULTIPLIED_BALLOTS_SUBDOMAIN());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         String urlParameters = "{\"multiplied_ballot\":{\"value\":" + multipliedBallots.toString() + "}}";
+        //TODO: preguntar camilo
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);
@@ -81,11 +86,9 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
-        int code = con.getResponseCode();
+        con.getResponseCode();
         String response = getResponseFromInputStream(con.getInputStream());
-
         Log.i("jiji", "recibiendo key = " + (new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value);
-
         return new BigInteger((new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value);
     }
 
@@ -95,7 +98,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
-        int code = con.getResponseCode();
+        con.getResponseCode();
         String response = getResponseFromInputStream(con.getInputStream());
         Gson gson = new Gson();
         AuthorityPublicKeyAllDocsResponse allDocsResponse = gson.fromJson(response, AuthorityPublicKeyAllDocsResponse.class);

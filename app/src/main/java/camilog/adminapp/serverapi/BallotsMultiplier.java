@@ -71,16 +71,6 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         con.getResponseCode();
     }
 
-    private BigInteger getEncryptedVoteValueById(String id) throws IOException{
-        URL obj = new URL(_server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + id);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.getResponseCode();
-        String response = getResponseFromInputStream(con.getInputStream());
-        return new BigInteger((new Gson()).fromJson(response, BallotsAllDocsResponse.BallotRowsResponse.class).value);
-    }
-
     private BigInteger getAuthorityPublicKeyById(String id) throws IOException{
         URL obj = new URL(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + id);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/election_layout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Election Name"
+        android:id="@+id/election_name_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@color/newred"
+        android:textColor="@android:color/white" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="320dp"
+        android:id="@+id/new_candidates_listview"
+        android:layout_below="@+id/election_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/tableRow" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_candidates_listview"></TableLayout>
+
+    <TableRow android:layout_width="match_parent" android:layout_height="50dp"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tableRow">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/start_stop_button"
+            android:background="@drawable/btn_red"
+            android:drawableLeft="@android:drawable/ic_media_play"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/upload_to_bb_button"
+            android:background="@drawable/btn_red"
+            android:drawableLeft="@android:drawable/ic_menu_upload" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="2x2"
+            android:id="@+id/multiply_ballots_button"
+            android:background="@drawable/btn_red"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/display_results_button"
+            android:background="@drawable/btn_red"
+            android:drawableLeft="@android:drawable/ic_menu_view"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:id="@+id/settings_button"
+            android:src="@android:drawable/ic_menu_preferences"
+            android:background="@drawable/btn_red"
+            android:layout_below="@+id/election_name_text"/>
+    </TableRow>
+
+
+</RelativeLayout>

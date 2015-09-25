@@ -29,7 +29,7 @@ public class ElectionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.election_layout);
+        setContentView(R.layout.election_layoutv2);
         try{
             initElectionManager();
             initElectionHolder();

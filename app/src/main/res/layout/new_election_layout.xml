@@ -13,8 +13,9 @@
         android:gravity="center"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:background="@color/button_material_light"
-        android:id="@+id/new_election_text" />
+        android:background="@color/newred"
+        android:id="@+id/new_election_text"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -66,25 +67,30 @@
         android:layout_height="100dp"
         android:id="@+id/new_candidates_listview"
         android:layout_below="@+id/listview_name_text"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tableLayout" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_candidate"
-        android:drawableLeft="@android:drawable/ic_input_add"
-        android:background="@drawable/btn_blue"
-        android:id="@+id/new_election_add_candidate_button"
-        android:layout_above="@+id/create_election_button"
-        android:layout_alignStart="@+id/create_election_button" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/create_election"
-        android:id="@+id/create_election_button"
-        android:background="@drawable/btn_blue"
+    <TableLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/tableLayout">
+        <TableRow android:weightSum="1" android:layout_height="50dp" android:layout_width="match_parent">
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:id="@+id/create_election_button"
+                android:drawableLeft="@android:drawable/ic_menu_save"
+                android:background="@drawable/btn_red"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:drawableLeft="@android:drawable/ic_menu_add"
+                android:background="@drawable/btn_red"
+                android:id="@+id/new_election_add_candidate_button"
+                android:layout_column="12" />
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>

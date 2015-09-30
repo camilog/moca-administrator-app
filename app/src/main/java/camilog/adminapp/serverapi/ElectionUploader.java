@@ -1,5 +1,7 @@
 package camilog.adminapp.serverapi;
 
+import android.util.Log;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -17,16 +19,19 @@ public class ElectionUploader extends AbstractBBServerTaskManager {
 
     private void startUploadThread(Election election) throws IOException {
         URL obj = new URL(_server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
+        Log.i("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         String urlParameters = new CandidatesListGsonAdapter(election).toJSON();
+        Log.i("jiji", "quiero subir " + urlParameters);
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);
         wr.flush();
         wr.close();
-        con.getResponseCode();
+        int code = con.getResponseCode();
+        Log.i("jiji", "code : , " + String.valueOf(code));
     }
 
     public void uploadCandidates(final Election election){

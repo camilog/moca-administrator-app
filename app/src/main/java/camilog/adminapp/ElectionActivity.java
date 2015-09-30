@@ -98,6 +98,7 @@ public class ElectionActivity extends Activity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Uploading election to bulletin board...", Toast.LENGTH_SHORT).show();
                 _election.uploadToBBServer();
             }
         });
@@ -106,6 +107,7 @@ public class ElectionActivity extends Activity {
             @Override
             public void onClick(View view) {
                 _election.multiplyBallots();
+                Toast.makeText(getApplicationContext(), "Multiplicating ballots...", Toast.LENGTH_SHORT).show();
             }
         });
         Button displayResultsButton = (Button) findViewById(R.id.display_results_button);

@@ -67,6 +67,9 @@ public class Election {
     public void multiplyBallots(){_bbServer.multiplyBallots(this);}
     public void obtainResults(){_bbServer.obtainResults(this);}
 
+    /**
+     * Returns true if election has candidates, or false if not
+    */
     public boolean hasCandidates(){
         return _noCandidates > 0;
     }

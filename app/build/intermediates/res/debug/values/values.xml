@@ -81,6 +81,7 @@
     <color name="material_deep_teal_500">#ff009688</color>
     <!-- From: file:/home/stefano/nicproj/moca-administrator-app/app/src/main/res/values/colors.xml -->
     <eat-comment/>
+    <item name="newred" type="color">#EF4444</item>
     <item name="orange" type="color">#FFFFBB33</item>
     <!-- From: file:/home/stefano/nicproj/moca-administrator-app/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>

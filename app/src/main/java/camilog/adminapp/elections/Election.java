@@ -65,6 +65,7 @@ public class Election {
         _bbServer.uploadElectionCandidates(this);
     }
     public void multiplyBallots(){_bbServer.multiplyBallots(this);}
+    public void obtainResults(){_bbServer.obtainResults(this);}
 
     public boolean hasCandidates(){
         return _noCandidates > 0;

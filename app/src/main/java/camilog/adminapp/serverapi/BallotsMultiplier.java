@@ -41,15 +41,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
     }
 
     private BallotsAllDocsResponse.BallotRowsResponse[] downloadBallotsAsRows() throws IOException{
-        Log.i("jiji", "voy a intentar conectarme");
-        Log.i("jiji", "adress = " + _server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
-        URL obj = new URL(_server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        int code = con.getResponseCode();
-        Log.i("jiji", "codigo conexion =  " + String.valueOf(code));
-        String response = BBServer.getResponseFromInputStream(con.getInputStream());
+        String response = _server.doJSONGETRequest(_server.getAddress() + "/" + _server.getBALLOTS_LIST_SUBDOMAIN() + "/" + _server.getALL_BALLOTS_VALUES_SUBDOMAIN());
         Gson gson = new Gson();
         BallotsAllDocsResponse ballotResponse = gson.fromJson(response, BallotsAllDocsResponse.class);
         BallotsAllDocsResponse.BallotRowsResponse[] rowsResponse = ballotResponse.rows;
@@ -71,29 +63,18 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
     }
 
     private BigInteger getAuthorityPublicKeyById(String id) throws IOException{
-        URL obj = new URL(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + id);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.getResponseCode();
-        String response = BBServer.getResponseFromInputStream(con.getInputStream());
+        String response = _server.doJSONGETRequest(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + id);
         Log.i("jiji", "recibiendo key = " + (new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value_nsplusone);
         return new BigInteger((new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value_nsplusone);
     }
 
     private BigInteger downloadAuthorityPublicKey() throws KeyNotFoundException, IOException{
-        BigInteger publicKey;
-        URL obj = new URL(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + _server.getALL_DOCS_SUBDOMAIN());
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.getResponseCode();
-        String response = BBServer.getResponseFromInputStream(con.getInputStream());
+        String response = _server.doJSONGETRequest(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + _server.getALL_DOCS_SUBDOMAIN());
         Gson gson = new Gson();
         AuthorityPublicKeyAllDocsResponse allDocsResponse = gson.fromJson(response, AuthorityPublicKeyAllDocsResponse.class);
         AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyRowsResponse[] rowsResponse = allDocsResponse.rows;
         String publicKeyId = getFirstRowId(rowsResponse);
-        publicKey = getAuthorityPublicKeyById(publicKeyId);
+        BigInteger publicKey = getAuthorityPublicKeyById(publicKeyId);
         if(publicKey == null)throw new KeyNotFoundException();
         return publicKey;
     }

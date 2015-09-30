@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -105,6 +106,14 @@ public class ElectionActivity extends Activity {
             @Override
             public void onClick(View view) {
                 _election.multiplyBallots();
+            }
+        });
+        Button displayResultsButton = (Button) findViewById(R.id.display_results_button);
+        displayResultsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _election.obtainResults();
+                Toast.makeText(getApplicationContext(), "Obtaining results...", Toast.LENGTH_SHORT).show();
             }
         });
     }

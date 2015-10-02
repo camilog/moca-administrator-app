@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -29,7 +30,7 @@ public class ElectionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.election_layout);
+        setContentView(R.layout.election_layoutv2);
         try{
             initElectionManager();
             initElectionHolder();
@@ -97,7 +98,24 @@ public class ElectionActivity extends Activity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Uploading election to bulletin board...", Toast.LENGTH_SHORT).show();
                 _election.uploadToBBServer();
+            }
+        });
+        Button multiplyBallotsButton = (Button) findViewById(R.id.multiply_ballots_button);
+        multiplyBallotsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _election.multiplyBallots();
+                Toast.makeText(getApplicationContext(), "Multiplicating ballots...", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Button displayResultsButton = (Button) findViewById(R.id.display_results_button);
+        displayResultsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _election.obtainResults();
+                Toast.makeText(getApplicationContext(), "Obtaining results...", Toast.LENGTH_SHORT).show();
             }
         });
     }

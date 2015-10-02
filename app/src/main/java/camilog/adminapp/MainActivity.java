@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activitymainv2);
         setElectionManager();
         initViews();
         addOnClickListeners();
@@ -61,12 +61,6 @@ public class MainActivity extends Activity {
     private void configureElectionsAdapter(){
         ArrayAdapter<Election> arrayAdapter = new ArrayAdapter<Election>(this, android.R.layout.simple_list_item_1, _electionHolder.getElectionsAsList());
         _electionsListView.setAdapter(arrayAdapter);
-    }
-
-    private void fillHolderWithCursor(ElectionSqlHelper.ElectionCursor cursor){
-        while(cursor.moveToNext()){
-            _electionHolder.addElection(cursor.getElection());
-        }
     }
 
     private void addOnClickListeners(){

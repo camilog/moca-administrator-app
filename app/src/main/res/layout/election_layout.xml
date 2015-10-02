@@ -62,14 +62,14 @@
         android:text="@string/display_results"
         android:id="@+id/display_results_button"
         android:background="@drawable/btn_blue"
-        android:layout_above="@+id/count_votes_button"
+        android:layout_above="@+id/multiply_ballots_button"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/count_votes"
-        android:id="@+id/count_votes_button"
+        android:text="@string/multiply_ballots"
+        android:id="@+id/multiply_ballots_button"
         android:background="@drawable/btn_blue"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />

@@ -7,7 +7,7 @@
     <string name="welcome_message">AdminApp</string>
     <string name="start_stop">Start/Stop</string>
     <string name="display_results">Display Results</string>
-    <string name="count_votes">Count votes</string>
+    <string name="multiply_ballots">Multiply Ballots</string>
     <string name="in_progress">In Progress</string>
     <string name="stopped">Stopped</string>
     <string name="settings">Settings</string>

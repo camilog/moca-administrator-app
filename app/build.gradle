@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    debugCompile fileTree(dir: 'libs', include: ['*.jar'])
+    debugCompile 'com.android.support:appcompat-v7:22.2.0'
     testCompile 'junit:junit:4.12'
 }

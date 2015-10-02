@@ -34,6 +34,11 @@ public class ElectionUploader extends AbstractBBServerTaskManager {
         Log.i("jiji", "code : , " + String.valueOf(code));
     }
 
+    /**
+     * Starts a thread that tries to upload the candidates of the election to the
+     * Bulletin Board
+     * @param election
+     */
     public void uploadCandidates(final Election election){
         new Thread() {
             public void run() {

@@ -31,6 +31,12 @@ public class ElectionHolder {
             addElection(cursor.getElection());
         }
     }
+
+    /**
+     *
+     * @param electionManager
+     * @return an instance of the ElectionHolder object
+     */
     public static ElectionHolder getElectionHolder(ElectionManager electionManager){
         if(uniqueInstance == null){
             uniqueInstance = new ElectionHolder(electionManager);
@@ -38,20 +44,48 @@ public class ElectionHolder {
         return uniqueInstance;
     }
 
+    /**
+     * Retrieves the election associated to an id
+     * @param id
+     * @return the {@link Election} object
+     * @throws ElectionNotFoundException
+     */
     public Election getElectionById(long id) throws ElectionNotFoundException {
         Election election;
         if((election = _idToElection.get(id)) == null)throw new ElectionNotFoundException("Election not found with ID " + id);
         return election;
     }
+
+    /**
+     * Adds an {@link Election} to the {@link ElectionHolder}
+     * @param election
+     */
     public void addElection(Election election){
         _electionsArrayList.add(election);
         _idToElection.put(election.getDB_ID(), election);
     }
 
+    /**
+     * Removes en election from the holder
+     * @param election
+     */
+    public void removeElection(Election election){
+        _idToElection.remove(election);
+        _electionsArrayList.remove(election);
+    }
+
+    /**
+     *
+     * @return a {@link Collection} with every election contained in the {@link ElectionHolder}
+     */
     public Collection<Election> getAllElections(){
         return _idToElection.values();
     }
 
+    /**
+     *
+     * @return an {@link ArrayList} containing all the elections in the holder
+     */
     public ArrayList<Election> getElectionsAsList(){
         return _electionsArrayList;
     }

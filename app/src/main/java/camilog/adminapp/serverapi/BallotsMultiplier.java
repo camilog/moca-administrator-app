@@ -22,6 +22,12 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
     public BallotsMultiplier(BBServer server){
         super(server);
     }
+
+    /**
+     * Starts a thread that downloads ballots from the Bulletin Board,
+     * multiplies them and uploads the result to the Bulletin Board
+     * @param election
+     */
     public void multiplyAndUploadBallots(final Election election){
         startMultiplyBallotsThread(election);
     }
@@ -30,11 +36,16 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         BallotsAllDocsResponse.BallotRowsResponse[] ballotRowsResponse = downloadBallotsAsRows();
         BigInteger authorityPublicKey = downloadAuthorityPublicKey();
         BigInteger result = BigInteger.ONE;
-        for(BallotsAllDocsResponse.BallotRowsResponse row : ballotRowsResponse){
-            BigInteger encryptedVoteValue = new BigInteger(row.value);
-            encryptedVoteValue = encryptedVoteValue.mod(authorityPublicKey);
-            result = result.multiply(encryptedVoteValue);
-            result = result.mod(authorityPublicKey);
+        try{
+            for(BallotsAllDocsResponse.BallotRowsResponse row : ballotRowsResponse){
+                BigInteger encryptedVoteValue = new BigInteger(row.value);
+                encryptedVoteValue = encryptedVoteValue.mod(authorityPublicKey);
+                result = result.multiply(encryptedVoteValue);
+                result = result.mod(authorityPublicKey);
+            }
+        }catch(NullPointerException e){
+            Log.e("jiji", "votos invalidos");
+            System.exit(1);
         }
         Log.i("jiji", "termine de multplicar, resultado = " + String.valueOf(result));
         return result;

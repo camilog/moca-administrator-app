@@ -25,6 +25,7 @@ public class BBServer {
     private final String AUTHORITY_PUBLIC_KEY_SUBDOMAIN = "authority_public_key";
     private final String PARTIAL_DECRYPTIONS_SUBDOMAIN = "partial_decryptions";
     private final String ALL_BALLOTS_VALUES_SUBDOMAIN = "_design/get_all_ballots/_view/get_all_ballots";
+    private final String ELECTION_RESULT_SUBDOMAIN = "election_result";
 
     private String _serverAddress;
     public BBServer(String address){
@@ -102,4 +103,5 @@ public class BBServer {
     public String getALL_BALLOTS_VALUES_SUBDOMAIN(){return ALL_BALLOTS_VALUES_SUBDOMAIN;}
     public String getDUMMY_SHARE_SUBDOMAIN(){return DUMMY_SHARE_SUBDOMAIN;}
     public String getPARTIAL_DECRYPTIONS_SUBDOMAIN(){return PARTIAL_DECRYPTIONS_SUBDOMAIN;}
+    public String getELECTION_RESULT_SUBDOMAIN(){return ELECTION_RESULT_SUBDOMAIN;}
 }

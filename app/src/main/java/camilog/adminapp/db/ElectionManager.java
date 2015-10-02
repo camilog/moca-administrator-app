@@ -11,6 +11,10 @@ public class ElectionManager {
     private ElectionSqlHelper _helper;
     private Context _context;
 
+    /**
+     * Creates a proxy to manage elections stored in the internal database
+     * @param context
+     */
     public ElectionManager(Context context){
         _context = context;
         _helper = ElectionSqlHelper.getElectionSqlHelper(context);

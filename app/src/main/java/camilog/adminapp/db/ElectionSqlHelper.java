@@ -34,6 +34,12 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
     private ElectionSqlHelper(Context context){
         super(context, DB_NAME, null, VERSION);
     }
+
+    /**
+     *
+     * @param context
+     * @return an instance of an ElectionSqlHelper
+     */
     public static ElectionSqlHelper getElectionSqlHelper(Context context){
         if(uniqueInstance==null){
             uniqueInstance = new ElectionSqlHelper(context);
@@ -62,6 +68,12 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
         return getWritableDatabase().insert(TABLE_ELECTIONS, null, values);
     }
 
+    /**
+     *
+     * @param election
+     * @return a String associated
+     * to the election formatted as "candidate1,...,candidaten", for example, "dog,cat,chicken"
+     */
     private String getElectionCandidatesAsCsv(Election election){
         ArrayList<Candidate> candidates = election.getCandidates();
         StringBuilder stringBuilder = new StringBuilder();
@@ -79,16 +91,29 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
         return stringBuilder.toString();
     }
 
+    /**
+     *
+     * @return a Cursor which goes through every Election
+     */
     public ElectionCursor queryAllElections(){
         Cursor cursor = getReadableDatabase().query(TABLE_ELECTIONS,null, null, null, null, null, null);
         return new ElectionCursor(cursor);
     }
 
+    /**
+     *
+     * @param id
+     * @return a Cursor pointing to a specific Election
+     */
     public ElectionCursor queryElectionById(long id){
         Cursor cursor = getReadableDatabase().query(TABLE_ELECTIONS,null, "_id = ?", new String[]{String.valueOf(id)}, null,null,null);
         return new ElectionCursor(cursor);
     }
 
+    /**
+     * Updates the election in the internal database
+     * @param e
+     */
     public void updateElection(Election e){
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_BBSERVER, e.getBBServer());
@@ -97,6 +122,9 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Cursor wrapper for elections
+     */
     public static class ElectionCursor extends CursorWrapper{
         public ElectionCursor(Cursor cursor){
             super(cursor);

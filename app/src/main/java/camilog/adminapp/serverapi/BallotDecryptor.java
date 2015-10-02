@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
@@ -13,11 +14,9 @@ import java.util.ArrayList;
 
 import camilog.adminapp.elections.Election;
 import camilog.adminapp.elections.ElectionResults;
-import paillierp.Paillier;
 import paillierp.PaillierThreshold;
 import paillierp.PartialDecryption;
 import paillierp.key.PaillierPrivateThresholdKey;
-
 
 /**
  * Created by stefano on 29-09-15.
@@ -27,6 +26,11 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
         super(server);
     }
 
+    /**
+     * Starts a thread which tries to retrieve the election results
+     * and uploads them to the Bulletin Board
+     * @param election
+     */
     public void obtainResults(final Election election){
         startObtainResultsThread(election);
     }
@@ -45,16 +49,35 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
                     PartialDecryption[] partialDecryptionsArray = ArrayListToArray(partialDecryptions);
                     BigInteger sumOfVotes = dummyShare.combineShares(partialDecryptionsArray);
                     Log.i("jiji", "sum of votes : " + sumOfVotes.toString() );
-                    ElectionResults finalResult = new ElectionResults(sumOfVotes, 5);// TODO: ERROR, HARDCODEADO!! CAMBIAR!!
+                    ElectionResults finalResult = new ElectionResults(sumOfVotes, 6);// TODO: ERROR, HARDCODEADO!! CAMBIAR!!
                     int i=1;
                     for(int votes : finalResult.getResultsByCandidate()){
                         Log.i("jiji", "candidate " + String.valueOf(i++) + ", votes : " + String.valueOf(votes));
                     }
+                    updateElectionResults(finalResult);
                 }catch(Exception e){
                     e.printStackTrace();
                 }
             }
         }.start();
+    }
+
+    private void updateElectionResults(final ElectionResults results) throws IOException{
+        URL obj = new URL(_server.getAddress() + "/" + _server.getELECTION_RESULT_SUBDOMAIN());
+        Log.i("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+        String urlParameters = new ResultsGsonAdapter(results).toJSON();
+        Log.i("jiji", "quiero subir " + urlParameters);
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+        int code = con.getResponseCode();
+        Log.i("jiji", "code : , " + String.valueOf(code));
+
     }
 
     private PartialDecryption[] ArrayListToArray(ArrayList<PartialDecryption> partialDecryptions){

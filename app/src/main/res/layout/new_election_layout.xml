@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_election_layout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/new_election"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@color/newred"
+        android:id="@+id/new_election_text"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/bb_server_url_setting"
+        android:id="@+id/new_election_bb_server_text"
+        android:layout_below="@+id/new_election_text"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/bb_server_hint"
+        android:id="@+id/new_election_bb_server_edit"
+        android:layout_below="@+id/new_election_bb_server_text"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/election_name"
+        android:id="@+id/new_election_name_text"
+        android:layout_below="@+id/new_election_bb_server_edit"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/election_name_hint"
+        android:gravity="center"
+        android:layout_below="@+id/new_election_name_text"
+        android:layout_alignParentStart="true"
+        android:id="@+id/new_election_name_edit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/candidates_list"
+        android:id="@+id/listview_name_text"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/new_candidates_listview"
+        android:layout_below="@+id/listview_name_text"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tableLayout" />
+
+    <TableLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tableLayout">
+        <TableRow android:weightSum="1" android:layout_height="50dp" android:layout_width="match_parent">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:id="@+id/create_election_button"
+                android:drawableLeft="@android:drawable/ic_menu_save"
+                android:background="@drawable/btn_red"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:drawableLeft="@android:drawable/ic_menu_add"
+                android:background="@drawable/btn_red"
+                android:id="@+id/new_election_add_candidate_button"
+                android:layout_column="12" />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

@@ -1,7 +1,7 @@
 # AdministratorApp
-App for the Election Administrator, which is part of the [*MoCa QR*](http://www.github.com/CamiloG/moca_qr) Voting System project.
+App for the Election Administrator, which is part of the [*MoCa QR*](http://mocaqr.niclabs.cl) Voting System project.
 
-Android app for the administrators to run all the next tasks:
+Android app for the administrators to run all the following tasks:
 - Set the list of candidates and upload candidates.xml to the BB.
 - Check integrity and correctness of the BB.
 - Calculate the ballots multiplication at the end of the election and upload the value to the BB.
@@ -27,6 +27,12 @@ Android app for the administrators to run all the next tasks:
 ### Configuration
 * First of all you have to configure the root address for the Bulletin Board server. Select 'Configure Bulletin Board address' and introduce the address.
 * The address is now shown on the top box of the main window.
+
+### Set list of candidates
+*Not implemented yet.*
+
+### Check integrity of Bulletin Board
+*Not implemented yet.*
 
 ### Multiplication Process
 * At the end of the election, select 'Multiply Ballots'.

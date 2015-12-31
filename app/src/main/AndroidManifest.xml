@@ -14,17 +14,33 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MultiplyBallotsActivity"
-            android:label="@string/title_activity_multiply_ballots" >
+            android:name=".ElectionActivity"
+            android:label="Election">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>-->
         </activity>
         <activity
-            android:name=".UploadCandidatesFileActivity"
-            android:label="@string/title_activity_upload_candidates_file" >
+            android:name=".ConfigurationActivity"
+            android:label="Settings">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".NewElectionActivity"
+            android:label="Create new election">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>-->
         </activity>
     </application>
 

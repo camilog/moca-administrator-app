@@ -107,7 +107,7 @@ public class ElectionActivity extends Activity {
             @Override
             public void onClick(View view) {
                 _election.multiplyBallots();
-                Toast.makeText(getApplicationContext(), "Multiplicating ballots...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Multiplying ballots...", Toast.LENGTH_SHORT).show();
             }
         });
         Button displayResultsButton = (Button) findViewById(R.id.display_results_button);

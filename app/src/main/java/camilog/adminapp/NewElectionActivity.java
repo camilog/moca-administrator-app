@@ -5,13 +5,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +25,11 @@ import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
 import camilog.adminapp.elections.Election;
 import camilog.adminapp.elections.ElectionHolder;
+import camilog.adminapp.serverapi.BBServer;
 
 /**
  * Created by stefano on 04-09-15.
+ * Modified by diego on 19-01-16.
  */
 public class NewElectionActivity extends Activity {
     private ArrayList<Candidate> _temporaryCandidates;
@@ -35,7 +43,7 @@ public class NewElectionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_election_layout);
+        setContentView(R.layout.new_election_layoutv2);
         initElectionManager();
         initElectionHolder();
         initTempCandidates();
@@ -57,11 +65,25 @@ public class NewElectionActivity extends Activity {
                 addCandidateButtonClick();
             }
         });
+
         Button addElectionButton = (Button) findViewById(R.id.create_election_button);
         addElectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addElectionButtonClick();
+            }
+        });
+
+        //Added button that checks integrity of BB before creating a new election
+        Button checkBBButton = (Button) findViewById(R.id.check_BB_button);
+        checkBBButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread() {
+                    public void run() {
+                        checkBBButtonClick();
+                    }
+                }.start();
             }
         });
     }
@@ -116,12 +138,81 @@ public class NewElectionActivity extends Activity {
         saveAll(election);
     }
 
-    private String retrieveBBServer(){
+    private void checkBBButtonClick() {
+        String bb_server = retrieveBBServer();
+        BBServer server = new BBServer(bb_server);
+        final boolean ok = getBBStatus(server);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                changeUI(ok);
+            }
+        });
+    }
+
+    //Displays an error message if BB is not correct, otherwise it reveals options to create an election
+    private void changeUI(boolean serverState) {
+        if (!serverState) {
+            Toast toast = Toast.makeText(getApplicationContext(), "BB not built correctly! Fix and try again.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
+            toast.show();
+        } else {
+            RelativeLayout hidden = (RelativeLayout) findViewById(R.id.hidden_area);
+            hidden.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //Creates boolean array that is filled according to the success of reaching each table of the BB
+    private boolean getBBStatus(BBServer server){
+        String baseAddress = server.getAddress()+"/";
+        boolean bbOK = true;
+        boolean[] pass = new boolean[8];
+
+        try {
+            pass[0] = checkUrl(new URL(baseAddress + server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN()));
+            pass[1] = checkUrl(new URL(baseAddress + server.getBALLOTS_LIST_SUBDOMAIN()));
+            pass[2] = checkUrl(new URL(baseAddress + server.getCANDIDATES_LIST_SUBDOMAIN()));
+            pass[3] = checkUrl(new URL(baseAddress + server.getDUMMY_SHARE_SUBDOMAIN()));
+            pass[4] = checkUrl(new URL(baseAddress + server.getELECTION_RESULT_SUBDOMAIN()));
+            pass[5] = checkUrl(new URL(baseAddress + server.getMULTIPLIED_BALLOTS_SUBDOMAIN()));
+            pass[6] = checkUrl(new URL(baseAddress + server.getPARTIAL_DECRYPTIONS_SUBDOMAIN()));
+            pass[7] = checkUrl(new URL(baseAddress + "voters_public_keys"));
+
+            for (int i = 0;i<pass.length;i++) {
+                if (!pass[i]) {
+                    bbOK = false;
+                    break;
+                }
+            }
+
+        } catch (MalformedURLException e) {
+            bbOK = false;
+            e.printStackTrace();
+        }
+        return bbOK;
+    }
+
+    //Tries to connect to a URL of the BB and assigns boolean value depending on success
+    private boolean checkUrl(URL url) {
+        boolean status = true;
+
+        try {
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            if (con.getResponseCode() != 200) {
+                status = false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    private String retrieveBBServer() {
         EditText bb_edit = (EditText) findViewById(R.id.new_election_bb_server_edit);
         return bb_edit.getText().toString();
     }
 
-    private String retrieveElectionName(){
+    private String retrieveElectionName() {
         EditText election_name_edit = (EditText) findViewById(R.id.new_election_name_edit);
         return election_name_edit.getText().toString();
     }

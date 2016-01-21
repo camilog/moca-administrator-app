@@ -23,4 +23,5 @@ dependencies {
     debugCompile fileTree(dir: 'libs', include: ['*.jar'])
     debugCompile 'com.android.support:appcompat-v7:22.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.zxing:core:3.2.1'
 }

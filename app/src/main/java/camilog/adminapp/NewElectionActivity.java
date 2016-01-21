@@ -79,6 +79,7 @@ public class NewElectionActivity extends Activity {
         checkBBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Checking BB...", Toast.LENGTH_SHORT).show();
                 new Thread() {
                     public void run() {
                         checkBBButtonClick();
@@ -88,28 +89,33 @@ public class NewElectionActivity extends Activity {
         });
     }
 
-    private void initTempCandidates(){
+    private void initTempCandidates() {
         _temporaryCandidates = new ArrayList<>();
     }
-    private void initElectionManager(){
+
+    private void initElectionManager() {
         _electionManager = new ElectionManager(getApplicationContext());
     }
-    private void initElectionHolder(){
+
+    private void initElectionHolder() {
         _electionHolder = ElectionHolder.getElectionHolder(_electionManager);
     }
-    private void addElectionToHolder(Election election){
+
+    private void addElectionToHolder(Election election) {
         _electionHolder.addElection(election);
     }
-    private void saveElectionToDatabase(Election election){
+
+    private void saveElectionToDatabase(Election election) {
         _electionManager.insertElection(election);
     }
-    private void saveAll(Election election){
+
+    private void saveAll(Election election) {
         addElectionToHolder(election);
         saveElectionToDatabase(election);
         this.finish();
     }
 
-    private void addCandidateButtonClick(){
+    private void addCandidateButtonClick() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText candidateNameInput = new EditText(this);
         alert.setTitle(addCandidateTitle);
@@ -130,7 +136,7 @@ public class NewElectionActivity extends Activity {
         alert.show();
     }
 
-    private void addElectionButtonClick(){
+    private void addElectionButtonClick() {
         String bb_server = retrieveBBServer();
         String election_name = retrieveElectionName();
         Election election = new Election(election_name, bb_server);
@@ -157,6 +163,9 @@ public class NewElectionActivity extends Activity {
             toast.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
             toast.show();
         } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "BB ok!", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 500);
+            toast.show();
             RelativeLayout hidden = (RelativeLayout) findViewById(R.id.hidden_area);
             hidden.setVisibility(View.VISIBLE);
         }

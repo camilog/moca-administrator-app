@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/election_layout">
+
+    <TableRow android:layout_width="match_parent" android:layout_height="70dp"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tableRowTop">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/new_election_name"
+            android:id="@+id/election_name_text"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="60dp"
+            android:paddingEnd="10dp"
+            android:background="@color/newred"
+            android:textColor="@android:color/white" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/settings_button"
+            android:src="@android:drawable/ic_menu_preferences"
+            android:background="@drawable/btn_red"/>
+
+    </TableRow>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_candidates_listview"
+        android:layout_below="@+id/tableRowTop"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/tableRow" />
+
+    <TableRow android:layout_width="match_parent" android:layout_height="60dp"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tableRow">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/start_stop_button"
+            android:background="@drawable/btn_red"
+            android:drawableStart="@android:drawable/ic_media_play"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/upload_to_bb_button"
+            android:background="@drawable/btn_red"
+            android:drawableStart="@android:drawable/ic_menu_upload"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/multiplication"
+            android:id="@+id/multiply_ballots_button"
+            android:background="@drawable/btn_red"
+            android:textColor="@android:color/white"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/display_results_button"
+            android:background="@drawable/btn_red"
+            android:drawableStart="@android:drawable/ic_menu_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:id="@+id/qr_button"
+            android:src="@drawable/qr"
+            android:scaleType="centerInside"
+            android:background="@drawable/btn_red"/>
+
+    </TableRow>
+
+</RelativeLayout>

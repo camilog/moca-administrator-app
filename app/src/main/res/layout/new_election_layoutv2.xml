@@ -38,7 +38,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check BB"
+        android:text="@string/check_bb_button"
         android:id="@+id/check_BB_button"
         android:layout_below="@+id/new_election_bb_server_edit"
         android:layout_centerHorizontal="true" />
@@ -100,14 +100,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:id="@+id/create_election_button"
-                android:drawableLeft="@android:drawable/ic_menu_save"
+                android:drawableStart="@android:drawable/ic_menu_save"
                 android:background="@drawable/btn_red"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:drawableLeft="@android:drawable/ic_menu_add"
+                android:drawableStart="@android:drawable/ic_menu_add"
                 android:background="@drawable/btn_red"
                 android:id="@+id/new_election_add_candidate_button"
                 android:layout_column="12" />

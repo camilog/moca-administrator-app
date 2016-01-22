@@ -1,9 +1,13 @@
 package camilog.adminapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -15,17 +19,21 @@ import com.google.zxing.qrcode.QRCodeWriter;
  * Created by diego on 19-01-16.
  */
 public class ShowQRActivity extends Activity{
+    private String candidateList;
+    private String publicKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_qr_layout);
+        addOnClickListeners();
 
-        String data = getIntent().getStringExtra("candidatesAndKey");
+        candidateList = getIntent().getStringExtra("candidates");
+        publicKey = getIntent().getStringExtra("publicKey");
         ImageView qrImageView = (ImageView) findViewById(R.id.qr_imageView);
 
         try {
-            qrImageView.setImageBitmap(generateQRCodeBitmap(data));
+            qrImageView.setImageBitmap(generateQRCodeBitmap(candidateList));
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -48,4 +56,32 @@ public class ShowQRActivity extends Activity{
         return bitmap;
     }
 
+    public void generateSecondQR(){
+        ImageView firstQR = (ImageView) findViewById(R.id.qr_imageView);
+        firstQR.setVisibility(View.GONE);
+        ImageView secondQR = (ImageView) findViewById(R.id.second_qr_imageView);
+        secondQR.setVisibility(View.VISIBLE);
+
+        try {
+            TextView candidateText = (TextView) findViewById(R.id.user_info_candidate);
+            candidateText.setVisibility(View.GONE);
+            TextView publicKeyText = (TextView) findViewById(R.id.user_info_key);
+            publicKeyText.setVisibility(View.VISIBLE);
+            secondQR.setImageBitmap(generateQRCodeBitmap(publicKey));
+            Button nextQR = (Button) findViewById(R.id.continue_to_other_qr);
+            nextQR.setVisibility(View.GONE);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addOnClickListeners(){
+        Button nextQR = (Button) findViewById(R.id.continue_to_other_qr);
+        nextQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                generateSecondQR();
+            }
+        });
+    }
 }

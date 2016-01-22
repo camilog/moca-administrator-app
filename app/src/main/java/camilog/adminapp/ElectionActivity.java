@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -120,11 +121,12 @@ public class ElectionActivity extends Activity {
         }
 
         //Added the '#' character to separate the candidate list from the key
-        String candidatesAndKey = candidateList + "#" + publicAuthKey;
         Intent intent = new Intent(ElectionActivity.this,ShowQRActivity.class);
-        intent.putExtra("candidatesAndKey",candidatesAndKey);
+        intent.putExtra("candidates",candidateList);
+        intent.putExtra("publicKey",publicAuthKey);
         startActivity(intent);
     }
+
 
     private void addOnClickListeners(){
         ImageButton configButton = (ImageButton) findViewById(R.id.settings_button);

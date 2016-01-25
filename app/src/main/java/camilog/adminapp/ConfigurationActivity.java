@@ -13,6 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -118,9 +127,33 @@ public class ConfigurationActivity extends Activity {
     private void downloadAuthkey() throws IOException {
         String server = _election.getBBServer();
         BBServer bbServer = new BBServer(server);
-        String response = bbServer.doJSONGETRequest(bbServer.getAddress() + "/" + bbServer.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + bbServer.getALL_DOCS_SUBDOMAIN());
+        String responseString = bbServer.doJSONGETRequest(bbServer.getAddress() + "/" + bbServer.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + bbServer.getALL_DOCS_SUBDOMAIN());
         File publicKeyDir = getApplicationContext().getDir("publicAuthKey", Context.MODE_PRIVATE);
         File publicKeyFile = new File(publicKeyDir, "publicAuthKey.key");
+
+        double keyValue = 0;
+        String keyValueString = "";
+        String id = "";
+
+        try {
+            JSONObject responseObject = new JSONObject(responseString);
+            JSONArray rows = responseObject.getJSONArray("rows");
+            JSONObject idObject = rows.getJSONObject(0);
+            id = idObject.get("id").toString();
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        String responseIDInfo = bbServer.doJSONGETRequest(bbServer.getAddress() + "/" + bbServer.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + id);
+
+        try {
+            JSONObject responseID = new JSONObject(responseIDInfo);
+            keyValue = responseID.getDouble("value_n");
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        
+        keyValueString = String.valueOf(keyValue);
 
         if (publicKeyFile.exists()) {
             publicKeyFile.delete();
@@ -129,7 +162,7 @@ public class ConfigurationActivity extends Activity {
         publicKeyFile.createNewFile();
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(publicKeyFile, true));
-        writer.write(response);
+        writer.write(keyValueString);
         writer.close();
 
         runOnUiThread(new Runnable() {

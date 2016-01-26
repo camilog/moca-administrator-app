@@ -26,6 +26,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import camilog.adminapp.db.ElectionManager;
 import camilog.adminapp.elections.Candidate;
@@ -35,7 +36,7 @@ import camilog.adminapp.serverapi.BBServer;
 
 /**
  * Created by stefano on 04-09-15.
- * Modified by diego on 21-01-16.
+ * Modified by diego diaz on 26-01-16.
  */
 public class ConfigurationActivity extends Activity {
 
@@ -131,8 +132,8 @@ public class ConfigurationActivity extends Activity {
         File publicKeyDir = getApplicationContext().getDir("publicAuthKey", Context.MODE_PRIVATE);
         File publicKeyFile = new File(publicKeyDir, "publicAuthKey.key");
 
-        double keyValue = 0;
-        String keyValueString = "";
+        String keyValueString;
+        String valueString;
         String id = "";
 
         try {
@@ -146,14 +147,11 @@ public class ConfigurationActivity extends Activity {
 
         String responseIDInfo = bbServer.doJSONGETRequest(bbServer.getAddress() + "/" + bbServer.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + id);
 
-        try {
-            JSONObject responseID = new JSONObject(responseIDInfo);
-            keyValue = responseID.getDouble("value_n");
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
-        
-        keyValueString = String.valueOf(keyValue);
+        String[] idInfo = responseIDInfo.split(",");
+        valueString = idInfo[2];
+        String keyValue[] = valueString.split(":");
+        keyValueString = keyValue[1];
+
 
         if (publicKeyFile.exists()) {
             publicKeyFile.delete();

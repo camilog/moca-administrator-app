@@ -62,6 +62,7 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
         }.start();
     }
 
+    //TODO:Que el json de los resultados se suba también al server correspondiente de resultados
     private void updateElectionResults(final ElectionResults results) throws IOException{
         URL obj = new URL(_server.getAddress() + "/" + _server.getELECTION_RESULT_SUBDOMAIN());
         Log.i("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());

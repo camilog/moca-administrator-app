@@ -35,6 +35,7 @@ public class ElectionUploader extends AbstractBBServerTaskManager {
         //uploadToResultsServer(_server, election);
     }
 
+    //TODO: Falta probar esto cuando se tenga definido dónde se van a subir los resultados
     private void uploadToResultsServer(BBServer server, Election e) throws IOException{
         URL res = new URL(server.getResultAddress());
         HttpURLConnection conn = (HttpURLConnection) res.openConnection();

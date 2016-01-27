@@ -32,6 +32,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
         startMultiplyBallotsThread(election);
     }
 
+    //TODO: Revisar por qué esto no está funcionando
     private BigInteger multiplyBallotsThread(Election election) throws IOException, KeyNotFoundException{
         BallotsAllDocsResponse.BallotRowsResponse[] ballotRowsResponse = downloadBallotsAsRows();
         BigInteger authorityPublicKey = downloadAuthorityPublicKey();
@@ -47,7 +48,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
             Log.e("jiji", "votos invalidos");
             System.exit(1);
         }
-        Log.i("jiji", "termine de multplicar, resultado = " + String.valueOf(result));
+        Log.i("jiji", "termine de multiplicar, resultado = " + String.valueOf(result));
         return result;
     }
 

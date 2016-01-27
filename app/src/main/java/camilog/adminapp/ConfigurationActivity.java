@@ -50,7 +50,7 @@ public class ConfigurationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.configuration_layoutv2);
+        setContentView(R.layout.configuration_layoutv3);
         try{
             initElectionManager();
             initElectionHolder();
@@ -81,6 +81,7 @@ public class ConfigurationActivity extends Activity {
 
     private void updateElection(){
         _election.setBBServer(((TextView) findViewById(R.id.bb_server_edit)).getText().toString());
+        _election.setResultServer(((TextView) findViewById(R.id.results_page_edit)).getText().toString());
     }
 
     private void saveElectionToDb(){

@@ -129,10 +129,22 @@ public class Election {
     public void setBBServer(String bbServerURL){_bbServer.setAddress(bbServerURL);}
 
     /**
+     * Sets the Results Server URL
+     * @param resultServerURL
+     */
+    public void setResultServer(String resultServerURL){_bbServer.setResultAddress(resultServerURL);}
+
+    /**
      *
      * @return the bulletin board server address
      */
     public String getBBServer(){return _bbServer.getAddress();}
+
+    /**
+     *
+     * @return the result server address
+     */
+    public String getResultServer(){return _bbServer.getResultAddress();}
 
     /**
      *

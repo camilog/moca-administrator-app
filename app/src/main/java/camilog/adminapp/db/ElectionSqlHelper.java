@@ -27,6 +27,7 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ELECTION_NAME = "name";
     private static final String COLUMN_CANDIDATES = "candidates";
     private static final String COLUMN_BBSERVER = "server";
+    private static final String COLUMN_RESULT_SERVER = "result_server";
     private static final String COLUMN_ID = "_id";
 
     private static ElectionSqlHelper uniqueInstance = null;
@@ -117,6 +118,7 @@ public class ElectionSqlHelper extends SQLiteOpenHelper {
     public void updateElection(Election e){
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_BBSERVER, e.getBBServer());
+        cv.put(COLUMN_RESULT_SERVER, e.getResultServer());
         cv.put(COLUMN_CANDIDATES, getElectionCandidatesAsCsv(e));
         getWritableDatabase().update(TABLE_ELECTIONS, cv, "_id = " + e.getDB_ID(), null);
     }

@@ -32,6 +32,22 @@ public class ElectionUploader extends AbstractBBServerTaskManager {
         wr.close();
         int code = con.getResponseCode();
         Log.i("jiji", "code : , " + String.valueOf(code));
+        //uploadToResultsServer(_server, election);
+    }
+
+    private void uploadToResultsServer(BBServer server, Election e) throws IOException{
+        URL res = new URL(server.getResultAddress());
+        HttpURLConnection conn = (HttpURLConnection) res.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        String urlParam = new CandidatesListGsonAdapter(e).toJSON();
+        conn.setDoOutput(true);
+        DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+        dos.writeBytes(urlParam);
+        dos.flush();
+        dos.close();
+        int code = conn.getResponseCode();
+        Log.i("jiji", "results code : , " + String.valueOf(code));
     }
 
     /**

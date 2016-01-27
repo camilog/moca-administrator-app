@@ -28,6 +28,7 @@ public class BBServer {
     private final String ELECTION_RESULT_SUBDOMAIN = "election_result";
 
     private String _serverAddress;
+    private String _resultServerAddress;
     public BBServer(String address){
         _serverAddress = address;
     }
@@ -94,7 +95,9 @@ public class BBServer {
     }
 
     public void setAddress(String serverAddress){_serverAddress = serverAddress;}
+    public void setResultAddress(String resultServerAddress){_resultServerAddress = resultServerAddress;}
     public String getAddress(){return _serverAddress;}
+    public String getResultAddress(){return _resultServerAddress;}
     public String getCANDIDATES_LIST_SUBDOMAIN(){return CANDIDATES_LIST_SUBDOMAIN;}
     public String getBALLOTS_LIST_SUBDOMAIN(){return BALLOTS_LIST_SUBDOMAIN;}
     public String getALL_DOCS_SUBDOMAIN(){return ALL_DOCS_SUBDOMAIN;}

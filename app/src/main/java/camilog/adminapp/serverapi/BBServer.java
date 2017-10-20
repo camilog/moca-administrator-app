@@ -17,18 +17,20 @@ import camilog.adminapp.elections.Election;
  * Created by stefano on 02-09-15.
  */
 public class BBServer {
-    private final String CANDIDATES_LIST_SUBDOMAIN = "candidates_list";
-    private final String BALLOTS_LIST_SUBDOMAIN = "ballots";
+    private final String CANDIDATES_LIST_SUBDOMAIN = "api/election";
+    private final String BALLOTS_LIST_SUBDOMAIN = "api/ballots";
     private final String ALL_DOCS_SUBDOMAIN = "_all_docs";
-    private final String DUMMY_SHARE_SUBDOMAIN = "dummy_share";
-    private final String MULTIPLIED_BALLOTS_SUBDOMAIN = "multiplied_ballots";
-    private final String AUTHORITY_PUBLIC_KEY_SUBDOMAIN = "authority_public_key";
-    private final String PARTIAL_DECRYPTIONS_SUBDOMAIN = "partial_decryptions";
+    private final String DUMMY_SHARE_SUBDOMAIN = "api/dummy_share_key";
+    private final String MULTIPLIED_BALLOTS_SUBDOMAIN = "api/multiplied_ballots";
+    private final String AUTHORITY_PUBLIC_KEY_SUBDOMAIN = "api/auth_public_key";
+    private final String PARTIAL_DECRYPTIONS_SUBDOMAIN = "api/partial_decryptions";
     private final String ALL_BALLOTS_VALUES_SUBDOMAIN = "_design/get_all_ballots/_view/get_all_ballots";
-    private final String ELECTION_RESULT_SUBDOMAIN = "election_result";
+    private final String ELECTION_RESULT_SUBDOMAIN = "api/final_outcome";
 
     private String _serverAddress;
     private String _resultServerAddress;
+    private String VOTERS_PUBLIC_KEYS_SUBDOMAIN = "api/voters_public_keys";
+
     public BBServer(String address){
         _serverAddress = address;
     }
@@ -85,12 +87,12 @@ public class BBServer {
      */
     public String doJSONGETRequest(String address) throws IOException{
         URL obj = new URL(address);
-        Log.i("jiji", "address : " + address);
+        Log.e("jiji", "address : " + address);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Content-Type", "application/json");
         int code = con.getResponseCode();
-        Log.i("jiji", "code : " + String.valueOf(code));
+        Log.e("jiji", "code : " + String.valueOf(code));
         return getResponseFromInputStream(con.getInputStream());
     }
 
@@ -107,4 +109,8 @@ public class BBServer {
     public String getDUMMY_SHARE_SUBDOMAIN(){return DUMMY_SHARE_SUBDOMAIN;}
     public String getPARTIAL_DECRYPTIONS_SUBDOMAIN(){return PARTIAL_DECRYPTIONS_SUBDOMAIN;}
     public String getELECTION_RESULT_SUBDOMAIN(){return ELECTION_RESULT_SUBDOMAIN;}
+
+    public String getVOTERS_PUBLIC_KEYS_SUBDOMAIN() {
+        return VOTERS_PUBLIC_KEYS_SUBDOMAIN;
+    }
 }

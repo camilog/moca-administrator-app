@@ -19,19 +19,19 @@ public class ElectionUploader extends AbstractBBServerTaskManager {
 
     private void startUploadThread(Election election) throws IOException {
         URL obj = new URL(_server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
-        Log.i("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
+        Log.e("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         String urlParameters = new CandidatesListGsonAdapter(election).toJSON();
-        Log.i("jiji", "quiero subir " + urlParameters);
+        Log.e("jiji", "quiero subir " + urlParameters);
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);
         wr.flush();
         wr.close();
         int code = con.getResponseCode();
-        Log.i("jiji", "code : , " + String.valueOf(code));
+        Log.e("jiji", "code : , " + String.valueOf(code));
         //uploadToResultsServer(_server, election);
     }
 
@@ -48,7 +48,7 @@ public class ElectionUploader extends AbstractBBServerTaskManager {
         dos.flush();
         dos.close();
         int code = conn.getResponseCode();
-        Log.i("jiji", "results code : , " + String.valueOf(code));
+        Log.e("jiji", "results code : , " + String.valueOf(code));
     }
 
     /**

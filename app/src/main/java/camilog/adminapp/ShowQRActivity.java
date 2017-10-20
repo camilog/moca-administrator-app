@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -29,6 +31,9 @@ public class ShowQRActivity extends Activity{
         addOnClickListeners();
 
         candidateList = getIntent().getStringExtra("candidates");
+
+        Log.e("jiji", "the candidates are: " + candidateList);
+
         publicKey = getIntent().getStringExtra("publicKey");
         ImageView qrImageView = (ImageView) findViewById(R.id.qr_imageView);
 

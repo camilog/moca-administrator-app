@@ -185,7 +185,7 @@ public class NewElectionActivity extends Activity {
             pass[4] = checkUrl(new URL(baseAddress + server.getELECTION_RESULT_SUBDOMAIN()));
             pass[5] = checkUrl(new URL(baseAddress + server.getMULTIPLIED_BALLOTS_SUBDOMAIN()));
             pass[6] = checkUrl(new URL(baseAddress + server.getPARTIAL_DECRYPTIONS_SUBDOMAIN()));
-            pass[7] = checkUrl(new URL(baseAddress + "voters_public_keys"));
+            pass[7] = checkUrl(new URL(baseAddress + server.getVOTERS_PUBLIC_KEYS_SUBDOMAIN()));
 
             for (int i = 0;i<pass.length;i++) {
                 if (!pass[i]) {
@@ -209,6 +209,7 @@ public class NewElectionActivity extends Activity {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             if (con.getResponseCode() != 200) {
                 status = false;
+                Log.e("connection", "Couldn't get the following url: " + url.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();

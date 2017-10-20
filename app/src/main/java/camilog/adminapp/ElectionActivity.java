@@ -49,7 +49,7 @@ public class ElectionActivity extends Activity {
             initializeElection();
             addOnClickListeners();
         }catch(ElectionHolder.ElectionNotFoundException e){
-            Log.i("jiji", "Error loading elections: " + e.getMessage());
+            Log.e("jiji", "Error loading elections: " + e.getMessage());
             System.exit(1);
         }
     }

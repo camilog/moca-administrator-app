@@ -48,7 +48,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
             Log.e("jiji", "votos invalidos");
             System.exit(1);
         }
-        Log.i("jiji", "termine de multiplicar, resultado = " + String.valueOf(result));
+        Log.e("jiji", "termine de multiplicar, resultado = " + String.valueOf(result));
         return result;
     }
 
@@ -76,7 +76,7 @@ public class BallotsMultiplier extends AbstractBBServerTaskManager{
 
     private BigInteger getAuthorityPublicKeyById(String id) throws IOException{
         String response = _server.doJSONGETRequest(_server.getAddress() + "/" + _server.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + id);
-        Log.i("jiji", "recibiendo key = " + (new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value_nsplusone);
+        Log.e("jiji", "recibiendo key = " + (new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value_nsplusone);
         return new BigInteger((new Gson()).fromJson(response, AuthorityPublicKeyAllDocsResponse.AuthorityPublicKeyParticularResponse.class).value_nsplusone);
     }
 

@@ -2,11 +2,85 @@
 <items version="2" >
 
     <item
-        jar="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.2.1/2287494d4f5f9f3a9a2bb6980e3f32053721b315/core-3.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
+        is-multidex="true"
+        jar="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_bb10b513ab2a6951e3be067ec4f3f355986a0dd6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/proyectos/moca/moca-administrator-app/app/libs/paillier.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5446155761d15e4570507fa735f2998c0ed8499d">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/2/paillier_fa22b42673ab6b3a988b95fae8d8f0d34b1f339c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/.android/build-cache/f36353c69de0e0c42dcd252257f23762dfb9b172/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b647527a17b060cf401b4f3ef15aee48144ab490/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7b2c853972ffe88823094913563042934210a80e">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_511512c71085bf193c6efd0ad8105a292fbb0e23/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.2.1/2287494d4f5f9f3a9a2bb6980e3f32053721b315/core-3.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
         sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
-        <dex dex="/home/diego/Escritorio/MOCA/moca-administrator-app/app/build/intermediates/pre-dexed/debug/core-3.2.1-6a0f300a9037773a659e8290650c8afe84ca8a21.jar" />
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10/core-3.2.1_70609d3b6212178f0a8964143c903df93c829f37/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.2.0_7d26f2e4acdeeecf322decb934143c5bd915367c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/proyectos/moca/moca-administrator-app/app/libs/gson-2.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/2/gson-2.3.1_a2aa3a19f126ebd92064c0dcd1c7d8a65540df17/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/.android/build-cache/5dee9bdc563d2b8ff8fa7f1fdd51930412df88d1/output/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.2.0_8fa18c12e2a72c7de1ea49ea5bac47bf9b0aa42e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/camilo/.android/build-cache/5dee9bdc563d2b8ff8fa7f1fdd51930412df88d1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/home/camilo/proyectos/moca/moca-administrator-app/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a8a3e794ff4328e462b0e583268a57b66cc2f90d/classes.dex" />
     </item>
 
 </items>

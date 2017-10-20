@@ -58,7 +58,7 @@ public class ConfigurationActivity extends Activity {
             setupLayout();
             addOnClickListeners();
         }catch(ElectionHolder.ElectionNotFoundException e){
-            Log.i("jiji", "Error loading elections: " + e.getMessage());
+            Log.e("jiji", "Error loading elections: " + e.getMessage());
             System.exit(1);
         }
     }
@@ -129,11 +129,11 @@ public class ConfigurationActivity extends Activity {
     private void downloadAuthkey() throws IOException {
         String server = _election.getBBServer();
         BBServer bbServer = new BBServer(server);
-        String responseString = bbServer.doJSONGETRequest(bbServer.getAddress() + "/" + bbServer.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN() + "/" + bbServer.getALL_DOCS_SUBDOMAIN());
+        String responseString = bbServer.doJSONGETRequest(bbServer.getAddress() + "/" + bbServer.getAUTHORITY_PUBLIC_KEY_SUBDOMAIN());
         File publicKeyDir = getApplicationContext().getDir("publicAuthKey", Context.MODE_PRIVATE);
         File publicKeyFile = new File(publicKeyDir, "publicAuthKey.key");
 
-        String keyValueString;
+        /*String keyValueString;
         String valueString;
         String id = "";
 
@@ -158,10 +158,10 @@ public class ConfigurationActivity extends Activity {
             publicKeyFile.delete();
         }
 
-        publicKeyFile.createNewFile();
+        publicKeyFile.createNewFile();*/
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(publicKeyFile, true));
-        writer.write(keyValueString);
+        writer.write(responseString);
         writer.close();
 
         runOnUiThread(new Runnable() {

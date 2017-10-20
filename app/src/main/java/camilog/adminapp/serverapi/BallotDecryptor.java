@@ -48,11 +48,11 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
                     partialDecryptions.add(dummySharePartialDecryption);
                     PartialDecryption[] partialDecryptionsArray = ArrayListToArray(partialDecryptions);
                     BigInteger sumOfVotes = dummyShare.combineShares(partialDecryptionsArray);
-                    Log.i("jiji", "sum of votes : " + sumOfVotes.toString() );
+                    Log.e("jiji", "sum of votes : " + sumOfVotes.toString() );
                     ElectionResults finalResult = new ElectionResults(sumOfVotes, 6);// TODO: ERROR, HARDCODEADO!! CAMBIAR!!
                     int i=1;
                     for(int votes : finalResult.getResultsByCandidate()){
-                        Log.i("jiji", "candidate " + String.valueOf(i++) + ", votes : " + String.valueOf(votes));
+                        Log.e("jiji", "candidate " + String.valueOf(i++) + ", votes : " + String.valueOf(votes));
                     }
                     updateElectionResults(finalResult);
                 }catch(Exception e){
@@ -65,19 +65,19 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
     //TODO:Que el json de los resultados se suba también al server correspondiente de resultados
     private void updateElectionResults(final ElectionResults results) throws IOException{
         URL obj = new URL(_server.getAddress() + "/" + _server.getELECTION_RESULT_SUBDOMAIN());
-        Log.i("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
+        Log.e("jiji", "address : " + _server.getAddress() + "/" + _server.getCANDIDATES_LIST_SUBDOMAIN());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         String urlParameters = new ResultsGsonAdapter(results).toJSON();
-        Log.i("jiji", "quiero subir " + urlParameters);
+        Log.e("jiji", "quiero subir " + urlParameters);
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);
         wr.flush();
         wr.close();
         int code = con.getResponseCode();
-        Log.i("jiji", "code : , " + String.valueOf(code));
+        Log.e("jiji", "code : , " + String.valueOf(code));
 
     }
 
@@ -131,7 +131,7 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
         AllDocsResponse allDocsResponse = new Gson().fromJson(response, AllDocsResponse.class);
         AllDocsResponse.ParticularResponse[] rowsResponse = allDocsResponse.rows;
         String id = rowsResponse[0].id; // dummyShare ID
-        Log.i("jiji", "dummy share id : " + id);
+        Log.e("jiji", "dummy share id : " + id);
         return downloadDummyShareById(id);
     }
 
@@ -139,7 +139,7 @@ public class BallotDecryptor extends AbstractBBServerTaskManager {
         String response = _server.doJSONGETRequest(_server.getAddress() + "/" + _server.getDUMMY_SHARE_SUBDOMAIN() + "/" + id);
         PrivateKey dummySharePrivateKey = new Gson().fromJson(response, PrivateKey.class);
         String log = String.format("obtuve private key: %s", dummySharePrivateKey.toString());
-        Log.i("jiji", log);
+        Log.e("jiji", log);
         return dummySharePrivateKey;
     }
 
